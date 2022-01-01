@@ -19,291 +19,50 @@
     <center>
         <br /><br />
         <h1>XtendM3 Generator</h1>
-        <p class="cursive">Generate your own XtendM3 transactions</p>
+        <p class="cursive">XtendM3 - made easy!</p>
         <br /><br /><br />
         <div class="container">
-            <div class="form-container w-50">
-                <div id="mainForm">
+            <div class="form-container w-75">
+                <div id="mainForm" class="form-group w-75">
                     <div class="row">
-                        <div class="form-group w-100">
-                            <label for="miProgram">MI Program</label>
-                            <input type="text" class="form-control" id="miProgram" name="miProgram"
-                                placeholder="EXTxxxMI">
-                        </div>
-                        <!-- <div class="form-group w-50">
-                            <label for="transaction">Transaction</label>
-                            <input type="text" class="form-control" id="transaction" name="transaction"
-                                placeholder="MI Transaction">
-                        </div> -->
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="form-group w-50">
-                            <label for="addTransaction">Add Transaction</label>
+                        <div class="form-group w-50 h-100" onclick="openCustomTable()">
+                            <!-- <label for="addTransaction">Add Transaction</label>
                             <input type="text" class="form-control" id="addTransaction" name="addTransaction"
-                                placeholder="Add Transaction">
+                                placeholder="Add Transaction"> -->
+                            <!-- <div class="bg-primary">New XtendM3 Table</div> -->
+                            <div class="card text-white bg-dark mb-3 customCard" style="max-width: 18rem;">
+                                <br />
+                                <h5 class="card-header">New XtendM3 Table</h5>
+                                <div class="card-body">
+                                    <br /><br />
+                                    <p class="card-text">Create a new XtendM3 table and CRUD transactions
+                                    </p>
+                                    <br />
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group w-50">
-                            <label for="deleteTransaction">Delete Transaction</label>
+                        <div class="form-group w-50 h-100" onclick="openM3Table()">
+                            <!-- <label for="deleteTransaction">Delete Transaction</label>
                             <input type="text" class="form-control" id="deleteTransaction" name="deleteTransaction"
-                                placeholder="Delete Transaction">
+                                placeholder="Delete Transaction"> -->
+                            <!-- <div class="bg-primary">Update M3 Table</div> -->
+                            <div class="card text-white bg-dark mb-3 customCard" style="max-width: 18rem;">
+                                <br />
+                                <h5 class="card-header">Update M3 Table</h5>
+                                <div class="card-body">
+                                    <br /><br />
+                                    <p class="card-text">Create XtendM3 APIs to update standard M3 tables</p>
+                                    <br />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br />
-                    <div class="row">
-                        <div class="form-group w-50">
-                            <label for="getTransaction">Get Transaction</label>
-                            <input type="text" class="form-control" id="getTransaction" name="getTransaction"
-                                placeholder="Get Transaction">
-                        </div>
-                        <div class="form-group w-50">
-                            <label for="updateTransaction">Update Transaction</label>
-                            <input type="text" class="form-control" id="updateTransaction" name="updateTransaction"
-                                placeholder="Update Transaction">
-                        </div>
-                    </div>
-                    <br />
-                    <!-- <div class="row">
-                        <div class="form-group w-100">
-                            <label for="transaction">Get Transaction</label>
-                            <input type="text" class="form-control" id="transaction" name="transaction"
-                                placeholder="Get Transaction">
-                        </div>
-                    </div> -->
-                    <div class="row">
-                        <div class="form-group w-50">
-                            <label for="userName">Username</label>
-                            <input type="text" class="form-control" id="userName" name="userName"
-                                placeholder="M3 Username">
-                        </div>
-                        <div class="form-group w-50">
-                            <label for="xtendTable">XtendM3 Table</label>
-                            <input type="text" class="form-control" id="xtendTable" name="xtendTable"
-                                placeholder="XtendM3 Table">
-                        </div>
-                    </div>
-                    <br />
-                    <div class="d-flex justify-content-between">
-                        <p><b>
-                                Fields
-                            </b>
-                        </p>
-                        <div>
-                            <button id="deleteButton" type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#deleteFieldModal">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                            <button id="editButton" type="button" class="btn" onclick="editField()">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
-                            </button>
-                            <button id="addButton" type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#fieldModal">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <table id="fieldsTable" class="table">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Length</th>
-                                <th scope="col">Number of decimals</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Primary Key</th>
-                            </tr>
-                        </thead>
-                        <tbody id="fieldsTableBody">
-                        </tbody>
-                    </table>
-                    <br />
-                    <button type="button" class="btn btn-primary" id="generate"
-                        onclick="generateJSONs()">Generate</button>
                 </div>
             </div>
         </div>
         <br /><br />
     </center>
-    <br /><br /><br /><br />
-    <center>
-        <div class="container">
-            <div class="row w-75">
-                <div class="row-md-3">
-                    <form>
-                        <button class="btn btn-primary" id="tableDownloadButton" type="button"
-                            onclick="downloadTableOutput()" disabled><i class="fa fa-download"></i> Table
-                        </button>
-                        <button class="btn btn-primary" id="addDownloadButton" type="button"
-                            onclick="downloadAddTransactionOutput()" disabled><i class="fa fa-download"></i> Add
-                        </button>
-                        <button class="btn btn-primary" id="deleteDownloadButton" type="button"
-                            onclick="downloadDeleteTransactionOutput()" disabled><i class="fa fa-download"></i> Delete
-                        </button>
-                        <button class="btn btn-primary" id="getDownloadButton" type="button"
-                            onclick="downloadGetTransactionOutput()" disabled><i class="fa fa-download"></i> Get
-                        </button>
-                        <button class="btn btn-primary" id="updateDownloadButton" type="button"
-                            onclick="downloadUpdateTransactionOutput()" disabled><i class="fa fa-download"></i> Update
-                        </button>
-                    </form>
-                </div>
-                <!-- <div class="col-md-3">
-                    <form>
 
-                    </form>
-                </div>
-                <div class="col-md-3">
-                    <form>
-
-                    </form>
-                </div>
-                <div class="col-md-3">
-                    <form>
-
-                    </form>
-                </div> -->
-            </div>
-        </div>
-        <br /><br /><br /><br />
-    </center>
-    <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="fieldModalLabel">Add Field</h5>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                </div>
-                <div class="modal-body">
-                    <form id="fieldForm" role="form">
-                        <div class="form-group fieldNameGroup">
-                            <label for="fieldName">Field Name</label>
-                            <input type="text" class="form-control text-uppercase" id="fieldName" name="fieldName"
-                                placeholder="Field Name" required="true">
-                            <br />
-                        </div>
-                        <div class="form-group fieldTypeGroup">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="fieldType">Type</label>
-                                <select class="form-select" id="fieldType">
-                                    <option selected value="Decimal">Decimal</option>
-                                    <option value="String">String</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group fieldLengthGroup">
-                            <label for="fieldLength">Length</label>
-                            <input type="text" class="form-control" id="fieldLength" name="fieldLength"
-                                placeholder="Length">
-                            <br />
-                        </div>
-                        <div class="form-group fieldDecimalGroup">
-                            <label for="fieldDecimal">Number of Decimals</label>
-                            <input type="text" class="form-control" id="fieldDecimal" name="fieldDecimal"
-                                placeholder="Number of Decimals">
-                            <br />
-                        </div>
-                        <div class="form-group">
-                            <label for="fieldDescription">Description</label>
-                            <input type="text" class="form-control" id="fieldDescription" name="fieldDescription"
-                                placeholder="Description">
-                            <br />
-                        </div>
-                        <div class="form-group">
-                            <input class="form-check-input mt-0" id="fieldprimaryKey" type="checkbox" value=""
-                                aria-label="Primary Key">
-                            <label for="fieldprimaryKey">Primary Key</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="fieldModalSubmit" onclick="addField()">Add
-                        Field</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Field</h5>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                </div>
-                <div class="modal-body">
-                    <form id="editfieldForm" role="form">
-                        <div class="form-group fieldNameGroup">
-                            <label for="editfieldName">Field Name</label>
-                            <input type="text" class="form-control text-uppercase" id="editfieldName" name="fieldName"
-                                placeholder="Field Name" required="true" aria-disabled="true" disabled>
-                            <br />
-                        </div>
-                        <div class="form-group fieldTypeGroup">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="editfieldType">Type</label>
-                                <select class="form-select" id="editfieldType">
-                                    <option selected value="Decimal">Decimal</option>
-                                    <option value="String">String</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group fieldLengthGroup">
-                            <label for="editfieldLength">Length</label>
-                            <input type="text" class="form-control" id="editfieldLength" name="fieldLength"
-                                placeholder="Length">
-                            <br />
-                        </div>
-                        <div class="form-group editfieldDecimalGroup">
-                            <label for="editfieldDecimal">Number of Decimals</label>
-                            <input type="text" class="form-control" id="editfieldDecimal" name="editfieldDecimal"
-                                placeholder="Number of Decimals">
-                            <br />
-                        </div>
-                        <div class="form-group">
-                            <label for="editfieldDescription">Description</label>
-                            <input type="text" class="form-control" id="editfieldDescription"
-                                name="editfieldDescription" placeholder="Description">
-                            <br />
-                        </div>
-                        <div class="form-group">
-                            <input class="form-check-input mt-0" id="editfieldprimaryKey" type="checkbox" value=""
-                                aria-label="Primary Key">
-                            <label for="editfieldprimaryKey">Primary Key</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="editfieldModalSubmit" onclick="saveChanges()">Save
-                        Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="deleteFieldModal" tabindex="-1" aria-labelledby="deleteFieldLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteFieldLabel">Add Field</h5>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Are you sure you want to delete the follwing fields?
-                    </p>
-                    <p>
-                        <span id="deleteFields"></span>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="deleteFieldButton" onclick="deleteField()">Delete
-                        Fields</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

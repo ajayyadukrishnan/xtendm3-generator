@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&family=Open+Sans:ital,wght@1,300&display=swap&display=swap');
 
 * {
     font-family: 'Josefin Sans', sans-serif;
@@ -7,4 +7,47 @@
 .cursive {
     font-family: 'Birthstone', cursive;
     font-size: 2.5em;
+}
+
+.customCard {
+    cursor: pointer;
+    border-radius: 7.5% !important;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: all .5s ease-in-out;
+}
+
+.customCard:hover {
+    /* box-shadow: 0 12px 20px 0 rgba(0,0,0,0.2); */
+    transform: scale(1.2);
+}
+
+.card-text {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.btn.disabled {
+    pointer-events: all !important;
+}
+
+#deleteButton {
+    cursor: pointer;
+    border-radius: 7.5% !important;
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+    transition: all .2s ease-in-out;
+    padding-bottom: 8px;
+}
+
+#deleteButton:not([disabled]) {
+    transform: scale(1.2);
+}
+
+#editButton {
+    cursor: pointer;
+    border-radius: 7.5% !important;
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+    transition: all .5s ease-in-out;
+}
+
+#editButton:not([disabled]) {
+    transform: scale(1.2);
 }

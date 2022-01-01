@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Update M3 Table</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/m3-table.js"></script>
+</head>
+
+<body>
+    <center>
+        <br /><br />
+        <h1>Update M3 Table</h1>
+        <p class="cursive">XtendM3 APIs to update M3 tables</p>
+        <br /><br /><br />
+        <div class="container">
+            <div class="form-container w-50">
+                <div id="mainForm">
+                    <div class="row">
+                        <div class="form-group w-50">
+                            <label for="miProgram">MI Program</label>
+                            <input type="text" class="form-control" id="miProgram" name="miProgram"
+                                placeholder="EXTxxxMI" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Format must be EXTxxxMI where x a number between 0 and 9
+                            </div>
+                        </div>
+                        <div class="form-group w-50">
+                            <label for="transaction">Transaction</label>
+                            <input type="text" class="form-control" id="transaction" name="transaction"
+                                placeholder="MI Transaction" autocomplete="off">
+                        </div>
+                    </div>
+                    <br />
+                    <!-- <div class="row">
+                        <div class="form-group w-100">
+                            <label for="transaction">Get Transaction</label>
+                            <input type="text" class="form-control" id="transaction" name="transaction"
+                                placeholder="Get Transaction">
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="form-group w-50">
+                            <label for="userName">Username</label>
+                            <input type="text" class="form-control" id="userName" name="userName"
+                                placeholder="M3 Username" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 10
+                                characters
+                            </div>
+                        </div>
+                        <div class="form-group w-50">
+                            <label for="m3Table">M3 Table</label>
+                            <!-- <input type="text" class="form-control" id="m3Table" name="m3Table"
+                                placeholder="M3 Table"> -->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="m3Table" name="m3Table"
+                                    placeholder="M3 Table" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" id="validateTable"
+                                        autocomplete="off">Validate</button>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="form-group w-100">
+                            <label for="tableIndex">Table Index</label>
+                            <select disabled class="form-select" id="tableIndex">
+                                <!-- <option selected value="Decimal">Decimal</option>
+                                <option value="String">String</option> -->
+                            </select>
+                        </div>
+                        <!-- <div class="form-group w-50">
+                            <label for="m3Table">M3 Table</label>
+                            <!-- <input type="text" class="form-control" id="m3Table" name="m3Table"
+                                placeholder="M3 Table">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="m3Table" name="m3Table"
+                                    placeholder="M3 Table">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        id="validateTable">Validate</button>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">
+
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="d-flex justify-content-between">
+                        <p><b>
+                                Fields
+                            </b>
+                        </p>
+                        <div>
+                            <button id="deleteButton" type="button" class="btn" onclick="deleteButtonModal()">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            <button id="editButton" type="button" class="btn" onclick="editField()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <button id="addButton" type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#fieldModal">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <table id="fieldsTable" class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Length</th>
+                                <th scope="col">Decimals</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Primary Key</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fieldsTableBody">
+                        </tbody>
+                    </table>
+                    <br />
+                    <button type="button" class="btn btn-primary disabled" id="generate" onclick="generateJSONs()"
+                        disabled>Generate</button>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+    </center>
+    <br /><br /><br /><br />
+    <center>
+        <div class="container">
+            <div class="row w-75">
+                <div class="row-md-3">
+                    <form>
+                        <!-- <button class="btn btn-primary" id="tableDownloadButton" type="button"
+                            onclick="downloadTableOutput()" disabled><i class="fa fa-download"></i> Table
+                        </button>
+                        <button class="btn btn-primary" id="addDownloadButton" type="button"
+                            onclick="downloadAddTransactionOutput()" disabled><i class="fa fa-download"></i> Add
+                        </button>
+                        <button class="btn btn-primary" id="deleteDownloadButton" type="button"
+                            onclick="downloadDeleteTransactionOutput()" disabled><i class="fa fa-download"></i> Delete
+                        </button>
+                        <button class="btn btn-primary" id="getDownloadButton" type="button"
+                            onclick="downloadGetTransactionOutput()" disabled><i class="fa fa-download"></i> Get
+                        </button> -->
+                        <button class="btn btn-primary" id="updateDownloadButton" type="button"
+                            onclick="downloadUpdateTransactionOutput()" disabled><i class="fa fa-download"></i> Update Transaction
+                        </button>
+                    </form>
+                </div>
+                <!-- <div class="col-md-3">
+                    <form>
+
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form>
+
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form>
+
+                    </form>
+                </div> -->
+            </div>
+        </div>
+        <br /><br /><br /><br />
+    </center>
+    <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fieldModalLabel">Add Field</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <form id="fieldForm" role="form">
+                        <div class="form-group fieldNameGroup">
+                            <label for="fieldName">Field Name</label>
+                            <!-- <input type="text" class="form-control text-uppercase" id="fieldName" name="fieldName"
+                                placeholder="Field Name" required="true">
+                            <div class="invalid-feedback">
+                                Only letters and numbers allowed. No spaces. Max length of 4
+                                characters
+                            </div> -->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="fieldName" name="fieldName"
+                                    placeholder="Field Name" required="true" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        id="validateField">Validate</button>
+                                </div>
+                                <!-- <div class="invalid-feedback">
+                                    Field does not exist in the table.
+                                </div> -->
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group fieldTypeGroup">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="fieldType">Type</label>
+                                <select class="form-select" id="fieldType" disabled>
+                                    <option selected value="Decimal">Decimal</option>
+                                    <option value="String">String</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group fieldLengthGroup">
+                            <label for="fieldLength">Length</label>
+                            <input type="text" class="form-control" id="fieldLength" name="fieldLength"
+                                placeholder="Length" disabled>
+                            <div class="invalid-feedback">
+                                String (1 to 10000) or Decimal (1 to 18)
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group fieldDecimalGroup">
+                            <label for="fieldDecimal">Number of Decimals</label>
+                            <input type="text" class="form-control" id="fieldDecimal" name="fieldDecimal"
+                                placeholder="Number of Decimals" disabled autocomplete="off">
+                            <div class="invalid-feedback">
+                                Decimal (0 to 18). Must be less than length
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldDescription">Description</label>
+                            <input type="text" class="form-control" id="fieldDescription" name="fieldDescription"
+                                placeholder="Description" disabled autocomplete="off">
+                            <div class="invalid-feedback">
+                                Only letters, numbers and spaces allowed
+                            </div>
+                            <br />
+                        </div>
+                        <!-- <div class="form-group">
+                            <input class="form-check-input mt-0" id="fieldprimaryKey" type="checkbox" value=""
+                                aria-label="Primary Key">
+                            <label for="fieldprimaryKey">Primary Key</label>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary disabled" id="fieldModalSubmit" onclick="addField()"
+                        disabled="true">Add
+                        Field</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Field</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <form id="editfieldForm" role="form">
+                        <div class="form-group fieldNameGroup">
+                            <label for="editfieldName">Field Name</label>
+                            <!-- <input type="text" class="form-control text-uppercase" id="editfieldName" name="fieldName"
+                                placeholder="Field Name" required="true" aria-disabled="true" disabled
+                                autocomplete="off"> -->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="editfieldName" name="editfieldName"
+                                    placeholder="Field Name" required="true" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        id="validateEditField">Validate</button>
+                                </div>
+                                <!-- <div class="invalid-feedback">
+                                        Field does not exist in the table.
+                                    </div> -->
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group fieldTypeGroup">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="editfieldType">Type</label>
+                                <select class="form-select" id="editfieldType" disabled>
+                                    <option selected value="Decimal">Decimal</option>
+                                    <option value="String">String</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group fieldLengthGroup">
+                            <label for="editfieldLength">Length</label>
+                            <input type="text" class="form-control" id="editfieldLength" name="fieldLength"
+                                placeholder="Length" autocomplete="off" disabled>
+                            <div class="invalid-feedback">
+                                String (1 to 10000) or Decimal (1 to 18)
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group editfieldDecimalGroup">
+                            <label for="editfieldDecimal">Number of Decimals</label>
+                            <input type="text" class="form-control" id="editfieldDecimal" name="editfieldDecimal"
+                                placeholder="Number of Decimals" autocomplete="off" disabled>
+                            <div class="invalid-feedback">
+                                Decimal (0 to 18). Must be less than length
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label for="editfieldDescription">Description</label>
+                            <input type="text" class="form-control" id="editfieldDescription"
+                                name="editfieldDescription" placeholder="Description" autocomplete="off" disabled>
+                            <div class="invalid-feedback">
+                                Only letters, numbers and spaces allowed
+                            </div>
+                            <br />
+                        </div>
+                        <!-- <div class="form-group">
+                            <input class="form-check-input mt-0" id="editfieldprimaryKey" type="checkbox" value=""
+                                aria-label="Primary Key" autocomplete="off">
+                            <label for="editfieldprimaryKey">Primary Key</label>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="editfieldModalSubmit" onclick="saveChanges()">Save
+                        Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteFieldModal" tabindex="-1" aria-labelledby="deleteFieldLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteFieldLabel">Add Field</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Are you sure you want to delete the follwing fields?
+                    </p>
+                    <p>
+                        <span id="deleteFields"></span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="deleteFieldButton" onclick="deleteField()">Delete
+                        Fields</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
