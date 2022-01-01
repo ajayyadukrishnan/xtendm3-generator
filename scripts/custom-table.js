@@ -24,7 +24,6 @@ window.onload = function () {
 
     $("#addTransaction").on("input", function () {
         var value = $(this).val().trim();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#deleteTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#addTransaction").removeClass("is-invalid");
             $("#addTransaction").addClass("is-valid");
@@ -36,7 +35,6 @@ window.onload = function () {
 
     $("#deleteTransaction").on("input", function () {
         var value = $(this).val().trim();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#deleteTransaction").removeClass("is-invalid");
             $("#deleteTransaction").addClass("is-valid");
@@ -48,7 +46,6 @@ window.onload = function () {
 
     $("#getTransaction").on("input", function () {
         var value = $(this).val().trim();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#deleteTransaction").val().trim() != value) {
             $("#getTransaction").removeClass("is-invalid");
             $("#getTransaction").addClass("is-valid");
@@ -60,7 +57,6 @@ window.onload = function () {
 
     $("#updateTransaction").on("input", function () {
         var value = $(this).val().trim();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#deleteTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#updateTransaction").removeClass("is-invalid");
             $("#updateTransaction").addClass("is-valid");
@@ -72,7 +68,6 @@ window.onload = function () {
 
     $("#userName").on("input", function () {
         var value = $(this).val();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,9}$")) {
             $("#userName").removeClass("is-invalid");
             $("#userName").addClass("is-valid");
@@ -84,7 +79,6 @@ window.onload = function () {
 
     $("#xtendTable").on("input", function () {
         var value = $(this).val();
-        console.log(value)
         if (value.match("^EXT[a-zA-Z0-9]{3}$")) {
             $("#xtendTable").removeClass("is-invalid");
             $("#xtendTable").addClass("is-valid");
@@ -586,6 +580,20 @@ function saveChanges() {
 
 }
 
+
+function deleteButtonModal() {
+    $("#deleteFieldModal").modal('toggle')
+    var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+    var selectedRows = [];
+    for (var i = 0; i < selectRowCheckbox.length; i++) {
+        if (selectRowCheckbox.item(i).checked) {
+            selectedRows.push(selectRowCheckbox.item(i).parentNode.parentNode.childNodes[1].innerHTML);
+        }
+    }
+    document.getElementById("deleteFields").innerHTML = selectedRows.join(", ");
+    // $("#deleteFields").html(selectedRows.join(","));
+}
+
 function generateJSONs() {
     var getTransaction = $("#getTransaction").val()
     var deleteTransaction = $("#deleteTransaction").val()
@@ -614,6 +622,7 @@ function generateJSONs() {
         "Description": "Update data in " + $("#xtendTable").val(),
         "UserName": $("#userName").val(),
         "Table": $("#xtendTable").val(),
+        "TableIndex": "00",
     };
 
     var getJSON = {
@@ -741,6 +750,8 @@ function generateJSONs() {
         $('#updateDownloadButton').prop('disabled', false);
         $("#tableDownloadButton").prop('disabled', false);
     });
+
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 100);
 
     // var done = 4;
     // $([addsettings, deletesettings, getsettings, updatesettings]).each(function () {
@@ -879,9 +890,164 @@ function downloadTableOutput() {
 
 
     var tableOutput = tableJSON
+    var tableOutputString = JSON.stringify(tableOutput)
+
+
+
+
+    var tableOutputString = `
+    function getCSRF() {
+        const req = {
+            method: 'GET',
+            url: '/m3api-rest/csrf',
+            cache: false
+        }
+        
+        return new Promise((resolve, reject) => {
+            $.ajax(req).then(
+                function (resp) {
+                    console.log(resp)
+                    resolve(resp)
+                },
+                function (err) {
+                    reject(err)
+                }
+            )
+        })
+    }
+    function copyToClipboard(text) {
+       var textArea = document.createElement( "textarea" );
+       textArea.value = text;
+       document.body.appendChild( textArea );       
+       textArea.select();
+       try {
+          var successful = document.execCommand( 'copy' );
+          console.log('Table export copied to clipboard. Do not copy any other text!!!');
+       } catch (err) {
+          console.log('Oops, unable to copy!',err);
+       }    
+       document.body.removeChild( textArea );
+    }
+    function getTableDetails(tableName) {
+        tableName = tableName.trim()
+        var csrf = ""
+        getCSRF().then(function(response) {
+            console.log(response)
+            csrf = response
+            console.log(csrf)
+            fetch('https://m3prduse1.m3.inforcloudsuite.com/foundation-rest/tenant/extensibility/dynamicdb/tables/' + tableName, {
+                headers: {
+                    'accept': 'application/json, text/plain, */*',
+                    'fnd-csrf-token': csrf
+                }
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                copyToClipboard(JSON.stringify(data))
+            });
+        }).catch(function(error) {
+            console.log(error)
+        })
+    }
+    function createTablefromClipboard(tableJSON) {
+        tableName = JSON.parse(tableJSON).tableName
+        var csrf = ""
+        getCSRF().then(function(response) {
+            console.log(response)
+            csrf = response
+            console.log(csrf)
+            fetch('https://m3prduse1.m3.inforcloudsuite.com/foundation-rest/tenant/extensibility/dynamicdb/tables/' + tableName + "/create", {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json, text/plain, */*',
+                    'fnd-csrf-token': csrf
+                }
+            }).then(function(response) {
+                console.log(response)
+                setTimeout(function(){
+                    fetch('https://m3prduse1.m3.inforcloudsuite.com/foundation-rest/tenant/extensibility/dynamicdb/tables', {
+                        method: 'PUT',
+                        headers: {
+                            'accept': 'application/json, text/plain, */*',
+                            'fnd-csrf-token': csrf,
+                            'Content-Type': 'application/json; charset=UTF-8'
+                        },
+                        body: tableJSON
+                    }).then(function(response) {
+                        console.log(response)
+                    }).catch(function(error) {
+                        console.log(error);
+                    });
+                }, 5000);
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }).catch(function(error) {
+            console.log(error)
+        })
+    }
+    function disableTable(tableName){
+        tableName = tableName.trim()
+        var csrf = ""
+        getCSRF().then(function(response) {
+            console.log(response)
+            csrf = response
+            console.log(csrf)
+            fetch('https://m3prduse1.m3.inforcloudsuite.com/foundation-rest/tenant/extensibility/dynamicdb/tables/' + tableName + "/active?active=false", {
+                headers: {
+                    'accept': 'application/json, text/plain, */*',
+                    'fnd-csrf-token': csrf
+                },
+                "method": "POST"
+            }).then(function(response) {
+                console.log(response)
+                return response.json();
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }).catch(function(error) {
+            console.log(error)
+        })
+    }
+    function deleteTable(tableName){
+        tableName = tableName.trim()
+        var csrf = ""
+        getCSRF().then(function(response) {
+            console.log(response)
+            csrf = response
+            console.log(csrf)
+            fetch('https://m3prduse1.m3.inforcloudsuite.com/foundation-rest/tenant/extensibility/dynamicdb/tables/' + tableName, {
+                headers: {
+                    'accept': 'application/json, text/plain, */*',
+                    'fnd-csrf-token': csrf
+                },
+                "method": "DELETE"
+            }).then(function(response) {
+                console.log(response)
+                return response.json();
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }).catch(function(error) {
+            console.log(error)
+        })
+    }createTablefromClipboard('` + tableOutputString.trim() + `')`
+
+
+
+
+
+
+
+
+
+
+
+
 
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(tableOutput)));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(tableOutputString));
     element.setAttribute('download', 'tableOutput.json');
 
     element.style.display = 'none';

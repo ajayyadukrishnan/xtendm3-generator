@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="form-group w-100">
                             <label for="miProgram">MI Program</label>
-                            <input type="text" class="form-control" id="miProgram" name="miProgram"
+                            <input autocomplete="off" type="text" class="form-control" id="miProgram" name="miProgram"
                                 placeholder="EXTxxxMI">
                             <div class="invalid-feedback">
                                 Format must be EXTxxxMI where x a number between 0 and 9
@@ -35,7 +35,7 @@
                         </div>
                         <!-- <div class="form-group w-50">
                             <label for="transaction">Transaction</label>
-                            <input type="text" class="form-control" id="transaction" name="transaction"
+                            <input autocomplete="off" type="text" class="form-control" id="transaction" name="transaction"
                                 placeholder="MI Transaction">
                         </div> -->
                     </div>
@@ -43,8 +43,8 @@
                     <div class="row">
                         <div class="form-group w-50">
                             <label for="addTransaction">Add Transaction</label>
-                            <input type="text" class="form-control" id="addTransaction" name="addTransaction"
-                                placeholder="Add Transaction">
+                            <input autocomplete="off" type="text" class="form-control" id="addTransaction"
+                                name="addTransaction" placeholder="Add Transaction">
                             <div class="invalid-feedback">
                                 Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 15
                                 characters
@@ -52,8 +52,8 @@
                         </div>
                         <div class="form-group w-50">
                             <label for="deleteTransaction">Delete Transaction</label>
-                            <input type="text" class="form-control" id="deleteTransaction" name="deleteTransaction"
-                                placeholder="Delete Transaction">
+                            <input autocomplete="off" type="text" class="form-control" id="deleteTransaction"
+                                name="deleteTransaction" placeholder="Delete Transaction">
                             <div class="invalid-feedback">
                                 Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 15
                                 characters
@@ -64,8 +64,8 @@
                     <div class="row">
                         <div class="form-group w-50">
                             <label for="getTransaction">Get Transaction</label>
-                            <input type="text" class="form-control" id="getTransaction" name="getTransaction"
-                                placeholder="Get Transaction">
+                            <input autocomplete="off" type="text" class="form-control" id="getTransaction"
+                                name="getTransaction" placeholder="Get Transaction">
                             <div class="invalid-feedback">
                                 Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 15
                                 characters
@@ -73,8 +73,8 @@
                         </div>
                         <div class="form-group w-50">
                             <label for="updateTransaction">Update Transaction</label>
-                            <input type="text" class="form-control" id="updateTransaction" name="updateTransaction"
-                                placeholder="Update Transaction">
+                            <input autocomplete="off" type="text" class="form-control" id="updateTransaction"
+                                name="updateTransaction" placeholder="Update Transaction">
                             <div class="invalid-feedback">
                                 Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 15
                                 characters
@@ -85,14 +85,14 @@
                     <!-- <div class="row">
                         <div class="form-group w-100">
                             <label for="transaction">Get Transaction</label>
-                            <input type="text" class="form-control" id="transaction" name="transaction"
+                            <input autocomplete="off" type="text" class="form-control" id="transaction" name="transaction"
                                 placeholder="Get Transaction">
                         </div>
                     </div> -->
                     <div class="row">
                         <div class="form-group w-50">
                             <label for="userName">Username</label>
-                            <input type="text" class="form-control" id="userName" name="userName"
+                            <input autocomplete="off" type="text" class="form-control" id="userName" name="userName"
                                 placeholder="M3 Username">
                             <div class="invalid-feedback">
                                 Must start with a letter. Only letters and numbers allowed. No spaces. Max length of 10
@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group w-50">
                             <label for="xtendTable">XtendM3 Table</label>
-                            <input type="text" class="form-control" id="xtendTable" name="xtendTable"
+                            <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
                                 placeholder="XtendM3 Table">
                             <div class="invalid-feedback">
                                 Format must be EXTxxx where x is a letter or a number between 0 and 9
@@ -115,8 +115,7 @@
                             </b>
                         </p>
                         <div>
-                            <button id="deleteButton" type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#deleteFieldModal">
+                            <button id="deleteButton" type="button" class="btn" onclick="deleteButtonModal()">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                             <button id="editButton" type="button" class="btn" onclick="editField()">
@@ -135,7 +134,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Length</th>
-                                <th scope="col">Number of decimals</th>
+                                <th scope="col">Decimals</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Primary Key</th>
                             </tr>
@@ -204,8 +203,8 @@
                     <form id="fieldForm" role="form">
                         <div class="form-group fieldNameGroup">
                             <label for="fieldName">Field Name</label>
-                            <input type="text" class="form-control text-uppercase" id="fieldName" name="fieldName"
-                                placeholder="Field Name" required="true">
+                            <input autocomplete="off" type="text" class="form-control text-uppercase" id="fieldName"
+                                name="fieldName" placeholder="Field Name" required="true">
                             <div class="invalid-feedback">
                                 Only letters and numbers allowed. No spaces. Max length of 4
                                 characters
@@ -223,8 +222,8 @@
                         </div>
                         <div class="form-group fieldLengthGroup">
                             <label for="fieldLength">Length</label>
-                            <input type="text" class="form-control" id="fieldLength" name="fieldLength"
-                                placeholder="Length">
+                            <input autocomplete="off" type="text" class="form-control" id="fieldLength"
+                                name="fieldLength" placeholder="Length">
                             <div class="invalid-feedback">
                                 String (1 to 10000) or Decimal (1 to 18)
                             </div>
@@ -232,8 +231,8 @@
                         </div>
                         <div class="form-group fieldDecimalGroup">
                             <label for="fieldDecimal">Number of Decimals</label>
-                            <input type="text" class="form-control" id="fieldDecimal" name="fieldDecimal"
-                                placeholder="Number of Decimals">
+                            <input autocomplete="off" type="text" class="form-control" id="fieldDecimal"
+                                name="fieldDecimal" placeholder="Number of Decimals">
                             <div class="invalid-feedback">
                                 Decimal (0 to 18). Must be less than length
                             </div>
@@ -241,16 +240,16 @@
                         </div>
                         <div class="form-group">
                             <label for="fieldDescription">Description</label>
-                            <input type="text" class="form-control" id="fieldDescription" name="fieldDescription"
-                                placeholder="Description">
+                            <input autocomplete="off" type="text" class="form-control" id="fieldDescription"
+                                name="fieldDescription" placeholder="Description">
                             <div class="invalid-feedback">
                                 Only letters, numbers and spaces allowed
                             </div>
                             <br />
                         </div>
                         <div class="form-group">
-                            <input class="form-check-input mt-0" id="fieldprimaryKey" type="checkbox" value=""
-                                aria-label="Primary Key">
+                            <input autocomplete="off" class="form-check-input mt-0" id="fieldprimaryKey" type="checkbox"
+                                value="" aria-label="Primary Key">
                             <label for="fieldprimaryKey">Primary Key</label>
                         </div>
                     </form>
@@ -274,8 +273,8 @@
                     <form id="editfieldForm" role="form">
                         <div class="form-group fieldNameGroup">
                             <label for="editfieldName">Field Name</label>
-                            <input type="text" class="form-control text-uppercase" id="editfieldName" name="fieldName"
-                                placeholder="Field Name" required="true" aria-disabled="true" disabled>
+                            <input autocomplete="off" type="text" class="form-control text-uppercase" id="editfieldName"
+                                name="fieldName" placeholder="Field Name" required="true" aria-disabled="true" disabled>
                             <div class="invalid-feedback">
                                 Only letters and numbers allowed. No spaces. Max length of 4
                                 characters
@@ -293,8 +292,8 @@
                         </div>
                         <div class="form-group fieldLengthGroup">
                             <label for="editfieldLength">Length</label>
-                            <input type="text" class="form-control" id="editfieldLength" name="fieldLength"
-                                placeholder="Length">
+                            <input autocomplete="off" type="text" class="form-control" id="editfieldLength"
+                                name="fieldLength" placeholder="Length">
                             <div class="invalid-feedback">
                                 String (1 to 10000) or Decimal (1 to 18)
                             </div>
@@ -302,8 +301,8 @@
                         </div>
                         <div class="form-group editfieldDecimalGroup">
                             <label for="editfieldDecimal">Number of Decimals</label>
-                            <input type="text" class="form-control" id="editfieldDecimal" name="editfieldDecimal"
-                                placeholder="Number of Decimals">
+                            <input autocomplete="off" type="text" class="form-control" id="editfieldDecimal"
+                                name="editfieldDecimal" placeholder="Number of Decimals">
                             <div class="invalid-feedback">
                                 Decimal (0 to 18). Must be less than length
                             </div>
@@ -311,7 +310,7 @@
                         </div>
                         <div class="form-group">
                             <label for="editfieldDescription">Description</label>
-                            <input type="text" class="form-control" id="editfieldDescription"
+                            <input autocomplete="off" type="text" class="form-control" id="editfieldDescription"
                                 name="editfieldDescription" placeholder="Description">
                             <div class="invalid-feedback">
                                 Only letters, numbers and spaces allowed
@@ -319,8 +318,8 @@
                             <br />
                         </div>
                         <div class="form-group">
-                            <input class="form-check-input mt-0" id="editfieldprimaryKey" type="checkbox" value=""
-                                aria-label="Primary Key">
+                            <input autocomplete="off" class="form-check-input mt-0" id="editfieldprimaryKey"
+                                type="checkbox" value="" aria-label="Primary Key">
                             <label for="editfieldprimaryKey">Primary Key</label>
                         </div>
                     </form>

@@ -785,6 +785,8 @@ function generateJSONs() {
         $('#updateDownloadButton').prop('disabled', false);
         $("#tableDownloadButton").prop('disabled', false);
     });
+
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 100);
 }
 
 
