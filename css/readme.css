@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&family=Open+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=The+Nautigal:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+* {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+li {
+    font-family: 'Poppins', sans-serif;
+    font-size: larger;
+}
+
+span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: x-large;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
