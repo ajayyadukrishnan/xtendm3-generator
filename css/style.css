@@ -1,12 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&family=Open+Sans:ital,wght@1,300&display=swap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&family=Open+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=The+Nautigal:wght@700&display=swap');
 
 * {
     font-family: 'Josefin Sans', sans-serif;
 }
 
 .cursive {
-    font-family: 'Birthstone', cursive;
-    font-size: 2.5em;
+    font-family: 'The Nautigal', cursive;
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #f7f7f7;
 }
 
 .customCard {
@@ -52,16 +55,16 @@
     transform: scale(1.2);
 }
 
-.invalid-feedback{
+.invalid-feedback {
     font-size: large !important;
 }
 
-.form-control.is-valid{
-    border-color: green !important;
+.form-control.is-valid {
+    border-color: rgb(41, 180, 22) !important;
     border: 3px solid;
 }
 
-.form-control.is-invalid{
+.form-control.is-invalid {
     border-color: red !important;
     border: 3px solid;
 }
@@ -71,30 +74,33 @@
 
 
 
-
+.btn-primary {
+    background-color:rgb(41, 180, 22) !important;
+    border-color: rgb(41, 180, 22) !important;
+}
 
 .bg {
-    animation:slide 5s ease-in-out infinite alternate;
-    background-image: linear-gradient(60deg, #ffda5f 50%, rgb(233, 168, 83) 50%);
-    bottom:0;
-    left:-50%;
-    opacity:.5;
-    position:fixed;
-    right:-50%;
-    top:0;
-    z-index:-1;
-  }
-  
-  .bg2 {
-    animation-direction:alternate-reverse;
-    animation-duration:4s;
-  }
-  
-  .bg3 {
-    animation-duration:5s;
-  }
-  
-  /* .content {
+    animation: slide 5s ease-in-out infinite alternate;
+    background-image: linear-gradient(-15deg, #eec67c 50%, rgb(255, 151, 15) 50%);
+    bottom: 0;
+    left: -50%;
+    opacity: .5;
+    position: fixed;
+    right: -50%;
+    top: 0;
+    z-index: -1;
+}
+
+.bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 5s;
+}
+
+.bg3 {
+    animation-duration: 5s;
+}
+
+/* .content {
     background-color:rgba(255,255,255,.8);
     border-radius:.25em;
     box-shadow:0 0 .25em rgba(0,0,0,.25);
@@ -110,12 +116,47 @@
   h1 {
     font-family:monospace;
   } */
-  
-  @keyframes slide {
+
+@keyframes slide {
     0% {
-      transform:translateX(-25%);
+        transform: translateX(-33%);
     }
+
     100% {
-      transform:translateX(25%);
+        transform: translateX(33%);
     }
-  }
+}
+
+/* .card {
+    animation:slide 5s ease-in-out infinite alternate;
+    background-image: linear-gradient(60deg, #6cff5f 50%, rgb(85, 83, 233) 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  } */
+
+
+
+input {
+    border-radius: 10px !important;
+    padding: 10px;
+    width: 100%;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    border: 1px solid rgb(0, 167, 245) !important;
+    box-shadow: 0px 0px 15px rgb(0, 167, 245) !important;
+}
+
+.modal-header {
+    background-color: rgb(255, 151, 15);
+    border-radius: 10px 10px 0px 0px;
+    color: white;
+    padding: 10px;
+}
