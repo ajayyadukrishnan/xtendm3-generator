@@ -143,13 +143,15 @@
                     </table>
                     <br />
                     <button type="button" class="btn btn-primary disabled" id="generate" onclick="generateJSONs()"
-                        disabled>Generate</button>
+                        disabled>Generate Table and APIs</button>
+                    <br /><br />
+                    <span id="generateMessage"></span>
                 </div>
             </div>
         </div>
         <br /><br />
     </center>
-    <br /><br /><br /><br />
+    <!-- <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> -->
     <center>
         <div class="container">
             <div class="row w-75">
@@ -194,7 +196,7 @@
     </center>
     <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content rounded-0">
                 <div class="modal-header">
                     <h5 class="modal-title" id="fieldModalLabel">Add Field</h5>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
@@ -211,7 +213,7 @@
                             </div> -->
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="fieldName" name="fieldName"
-                                    placeholder="Field Name" required="true" autocomplete="off">
+                                    placeholder="Field Name" required="true" autocomplete="off" list="fieldDataList">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="button"
                                         id="validateField">Validate</button>
@@ -219,6 +221,9 @@
                                 <!-- <div class="invalid-feedback">
                                     Field does not exist in the table.
                                 </div> -->
+                                <datalist id="fieldDataList">
+
+                                </datalist>
                             </div>
                             <br />
                         </div>
@@ -290,11 +295,15 @@
                                 autocomplete="off"> -->
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="editfieldName" name="editfieldName"
-                                    placeholder="Field Name" required="true" autocomplete="off">
+                                    placeholder="Field Name" required="true" autocomplete="off"
+                                    list="editfieldDataList">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-primary" type="button"
                                         id="validateEditField">Validate</button>
                                 </div>
+                                <datalist id="editfieldDataList">
+
+                                </datalist>
                                 <!-- <div class="invalid-feedback">
                                         Field does not exist in the table.
                                     </div> -->

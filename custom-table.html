@@ -150,12 +150,14 @@
                     <br />
                     <button type="button" class="btn btn-primary" id="generate"
                         onclick="generateJSONs()">Generate</button>
+                    <br /><br />
+                    <span id="generateMessage"></span>
                 </div>
             </div>
         </div>
         <br /><br />
     </center>
-    <br /><br /><br /><br />
+    <!-- <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> -->
     <center>
         <div class="container">
             <div class="row w-75">
@@ -208,11 +210,17 @@
                     <form id="fieldForm" role="form">
                         <div class="form-group fieldNameGroup">
                             <label for="fieldName">Field Name</label>
-                            <input autocomplete="off" type="text" class="form-control text-uppercase" id="fieldName"
-                                name="fieldName" placeholder="Field Name" required="true">
-                            <div class="invalid-feedback">
-                                Only letters and numbers allowed. No spaces. Max length of 4
-                                characters
+                            <div class="input-group mb-3">
+                                <input autocomplete="off" type="text" class="form-control text-uppercase" id="fieldName"
+                                    name="fieldName" placeholder="Field Name" required="true">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        id="lookupField">Auto-fill</button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Only letters and numbers allowed. No spaces. Max length of 4
+                                    characters
+                                </div>
                             </div>
                             <br />
                         </div>
