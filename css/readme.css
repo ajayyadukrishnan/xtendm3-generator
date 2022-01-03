@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 
-* {
+/* * {
     font-family: 'Josefin Sans', sans-serif;
-}
+} */
 
 li {
     font-family: 'Poppins', sans-serif;
@@ -20,4 +20,30 @@ span {
 
 p {
     font-family: 'Open Sans', sans-serif;
+}
+
+#importing-xtendm3-table-to-m3{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700 !important;
+    font-size: xx-large;
+}
+
+
+#readmeDescription {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: larger;
+    font-weight: 100 !important;
+}
+
+#instructions{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: x-large;
+    font-weight: bold !important;
+}
+
+#success{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: x-large;
+    font-weight: 500 !important;
+    padding-bottom: 100px;
 }

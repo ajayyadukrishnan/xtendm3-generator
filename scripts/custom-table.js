@@ -532,9 +532,9 @@ function addField() {
     var fieldDescription = document.getElementById("fieldDescription").value;
     var fieldprimaryKey = document.getElementById("fieldprimaryKey").checked;
 
-    if (!fieldType.match("^Decimal$")) {
-        fieldDecimal = "";
-    }
+    // if (!fieldType.match("^Decimal$")) {
+    //     fieldDecimal = "";
+    // }
 
     var checkboxCell = document.createElement("td");
     var fieldNameCell = document.createElement("td");
@@ -628,9 +628,9 @@ function saveChanges() {
     var fieldDescription = document.getElementById("editfieldDescription").value;
     var fieldprimaryKey = document.getElementById("editfieldprimaryKey").checked;
 
-    if (!fieldType.match("^Decimal$")) {
-        fieldDecimal = "";
-    }
+    // if (!fieldType.match("^Decimal$")) {
+    //     fieldDecimal = "";
+    // }
 
     var row = selectedRows[0].parentNode.parentNode;
     row.childNodes[1].innerHTML = fieldName;
