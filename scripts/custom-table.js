@@ -8,6 +8,8 @@ var enableAddDownload = false;
 var enableDeleteDownload = false;
 var enableGetDownload = false;
 var enableUpdateDownload = false;
+var referenceTableMetaData = {};
+var referenceTablePrefix = "";
 window.onload = function () {
     console.log("Hello World!");
 
@@ -241,9 +243,22 @@ window.onload = function () {
         }
     });
 
+
+    $("#referenceTable").on("input", function () {
+        var value = $(this).val();
+        $("#referenceTable").removeClass("is-valid");
+        $("#referenceTable").add("is-invalid");
+
+        $("#referenceTableIndex").empty();
+        $("#fieldsTableBody").empty();
+        fields = []
+    });
+
     $("#fieldModal").on('show.bs.modal', function () {
         document.getElementById("fieldForm").reset();
         var modal = document.getElementById("fieldModal");
+
+        $("#fieldprimaryKey").prop("disabled", false)
         // console.log(modal.getElementsByClassName("is-invalid"))
         validClasses = modal.getElementsByClassName("is-valid");
         for (var i = 0; i < validClasses.length; i++) {
@@ -253,6 +268,12 @@ window.onload = function () {
         for (var i = 0; i < invalidClasses.length; i++) {
             invalidClasses.item(i).classList.remove("is-invalid");
         };
+
+        var referenceTableIndex = $("#referenceTableIndex").val();
+        if (referenceTableIndex != "" && referenceTableIndex != null && referenceTableIndex != undefined) {
+            console.log(referenceTableIndex);
+            $("#fieldprimaryKey").prop("disabled", true)
+        }
         $("#fieldName").removeClass("is-invalid");
         $("#fieldName").removeClass("is-valid");
         $("#fieldType").removeClass("is-invalid");
@@ -268,6 +289,7 @@ window.onload = function () {
     });
 
     $("#editModal").on('show.bs.modal', function () {
+        $("#editfieldprimaryKey").prop("disabled", false);
         document.getElementById("editfieldForm").reset();
         var modal = document.getElementById("editModal");
         // console.log(modal.getElementsByClassName("is-invalid"))
@@ -287,6 +309,10 @@ window.onload = function () {
             if (selectRowCheckbox.item(i).checked) {
                 selectedRows.push(selectRowCheckbox.item(i).parentNode.parentNode);
             }
+        }
+        var referenceTableIndex = $("#referenceTableIndex").val();
+        if (referenceTableIndex != "" && referenceTableIndex != null && referenceTableIndex != undefined) {
+            $("#editfieldprimaryKey").prop("disabled", true)
         }
         console.log(selectedRows);
         var cols = selectedRows[0].childNodes;
@@ -407,6 +433,89 @@ window.onload = function () {
             });
         }
     });
+
+
+
+
+
+
+    $("#validateTable").on("click", function () {
+        var value = $("#referenceTable").val();
+        console.log(value)
+        if (value.trim() == "") {
+            // $("#m3Table").removeClass("is-valid");
+            // $("#m3Table").addClass("is-invalid");
+            // tablePrefix = "";
+            return;
+        }
+        // $.LoadingOverlay("show", {
+        //     image: "",
+        //     fontawesome: "fa fa-cog fa-spin"
+        // });
+        // $("#referenceTable").removeClass("is-loading");
+        // $("#referenceTable").addClass("is-loading");
+        var getTableMetadataData = {
+            "url": "https://xtendm3-api.herokuapp.com/tables/getTableMetadata?table=" + value,
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            "data": JSON.stringify({}),
+        };
+
+        $.ajax(getTableMetadataData).done(function (response) {
+            console.log(response);
+            // $("#referenceTable").removeClass("is-loading");
+            if (response["columns"].length > 0) {
+                $("#referenceTable").removeClass("is-invalid");
+                $("#referenceTable").addClass("is-valid");
+                tableMetadata = response;
+                referenceTablePrefix = tableMetadata["table_prefix"];
+
+
+
+                var indices = {}
+                indices = tableMetadata["indices"];
+                indices = Object.keys(indices).sort().reduce(
+                    (obj, key) => {
+                        obj[key] = indices[key];
+                        return obj;
+                    },
+                    {}
+                );
+                $("#referenceTableIndex").empty();
+                // $("#referenceTableIndex").append("<option value=''>Select an index</option>");
+                for (const key of Object.keys(indices).sort()) {
+                    const indexDetails = indices[key].map(({ column }) => column.substring(2));
+                    console.log(indexDetails.join([separator = ', ']));
+                    $("#referenceTableIndex").append("<option value='" + key + "'>" + key + " - " + indexDetails.join([separator = ', ']) + "</option>");
+                }
+                $("#referenceTableIndex").prop("disabled", false);
+                updateIndexFields();
+            } else {
+                $("#referenceTable").removeClass("is-valid");
+                $("#referenceTable").addClass("is-invalid");
+            }
+        });
+
+    });
+
+
+
+
+
+    $("#referenceTableIndex").on("change", function () {
+        updateIndexFields();
+    });
+
+
+
+
+
+
+
 
 
     $(function () {
@@ -664,6 +773,74 @@ function deleteButtonModal() {
     }
     document.getElementById("deleteFields").innerHTML = selectedRows.join(", ");
     // $("#deleteFields").html(selectedRows.join(","));
+}
+
+
+function updateIndexFields() {
+    console.log(tableMetadata);
+    var value = $("#referenceTableIndex").val();
+    console.log(value);
+
+    $("#fieldsTableBody").empty();
+    fields = []
+
+    for (var i = tableMetadata["indices"][value].length - 1; i >= 0; i--) {
+        var index = tableMetadata["indices"][value][i];
+        console.log(index);
+        var columnDetails = tableMetadata["columns"].filter(function (el) {
+            return el.name == index.column;
+        });
+        console.log(columnDetails);
+        if (fields.indexOf(referenceTablePrefix + columnDetails[0].name.trim().toUpperCase()) != -1) {
+            continue;
+        }
+        var row = document.createElement("tr");
+        row.className = "clickable-row";
+        var checkboxCell = document.createElement("td");
+        var fieldNameCell = document.createElement("td");
+        var fieldTypeCell = document.createElement("td");
+        var fieldLengthCell = document.createElement("td");
+        var fieldDecimalCell = document.createElement("td");
+        var fieldDescriptionCell = document.createElement("td");
+        var fieldprimaryKeyCell = document.createElement("td");
+
+        fieldNameCell.innerHTML = columnDetails[0].name.substring(2);
+        fieldTypeCell.innerHTML = columnDetails[0].type == "CHAR" ? "String" : "Decimal";
+        fieldLengthCell.innerHTML = columnDetails[0].length;
+        fieldDecimalCell.innerHTML = columnDetails[0].decimals;
+        fieldDescriptionCell.innerHTML = columnDetails[0].description;
+        fieldprimaryKeyCell.innerHTML = true;
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input mt-0 selectRowCheckbox";
+        checkbox.value = "";
+        checkbox.id = "checkbox";
+        checkbox.disabled = true;
+        checkboxCell.appendChild(checkbox);
+
+        // <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"></input>
+
+        row.appendChild(checkboxCell);
+        row.appendChild(fieldNameCell);
+        row.appendChild(fieldTypeCell);
+        row.appendChild(fieldLengthCell);
+        row.appendChild(fieldDecimalCell);
+        row.appendChild(fieldDescriptionCell);
+        row.appendChild(fieldprimaryKeyCell);
+
+        document.getElementById("fieldsTableBody").prepend(row);
+        fields.push(columnDetails[0].name.trim().toUpperCase());
+    }
+
+
+
+
+
+    // fields.push(fieldName);
+    // if (fieldprimaryKey) {
+    //     primaryKeys.push(fieldName);
+    // }
 }
 
 function generateJSONs() {
@@ -937,12 +1114,22 @@ function generateJSONs() {
     var addTransaction = $("#addTransaction").val()
     var updateTransaction = $("#updateTransaction").val()
 
+    var referenceTable = $("#referenceTable").val()
+    var referenceTableIndex = $("#referenceTableIndex").val()
+
+    if (referenceTableIndex == undefined || referenceTableIndex == null || referenceTableIndex == "") {
+        referenceTable = "";
+        referenceTableIndex = "";
+    }
+
     var addJSON = {
         "MIProgram": $("#miProgram").val(),
         "Transaction": addTransaction,
         "Description": "Add data to " + $("#xtendTable").val(),
         "UserName": $("#userName").val(),
         "Table": $("#xtendTable").val(),
+        "referenceTable": referenceTable,
+        "referenceTableIndex": referenceTableIndex,
     };
 
     var deleteJSON = {

@@ -56,7 +56,8 @@
 }
 
 .invalid-feedback {
-    font-size: large !important;
+    font-size: medium !important;
+    color: red !important;
 }
 
 .form-control.is-valid {
@@ -169,13 +170,19 @@ input:focus {
 
 label {
     font-size: 1.2em;
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-bottom: 10px;
 }
 
 .btn {
     height: 2.2em;
     align-content: center;
+}
+
+#validateTable:before{
+    content: "";
+    border: red !important;
+    bottom: 20px !important;
 }
 
 .form-select {

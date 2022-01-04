@@ -29,7 +29,7 @@
         <div class="container">
             <div class="form-container w-75">
                 <div id="mainForm">
-                    <div class="row">
+                    <div class="row col-8">
                         <div class="form-group w-100">
                             <label for="miProgram">MI Program</label>
                             <input autocomplete="off" type="text" class="form-control" id="miProgram" name="miProgram"
@@ -45,7 +45,7 @@
                         </div> -->
                     </div>
                     <br />
-                    <div class="row">
+                    <div class="row col-8">
                         <div class="form-group w-50">
                             <label for="addTransaction">Add Transaction</label>
                             <input autocomplete="off" type="text" class="form-control" id="addTransaction"
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="row">
+                    <div class="row col-8">
                         <div class="form-group w-50">
                             <label for="getTransaction">Get Transaction</label>
                             <input autocomplete="off" type="text" class="form-control" id="getTransaction"
@@ -94,7 +94,7 @@
                                 placeholder="Get Transaction">
                         </div>
                     </div> -->
-                    <div class="row">
+                    <div class="row col-8">
                         <div class="form-group w-50">
                             <label for="userName">Username</label>
                             <input autocomplete="off" type="text" class="form-control" id="userName" name="userName"
@@ -111,6 +111,34 @@
                             <div class="invalid-feedback">
                                 Format must be EXTxxx where x is a letter or a number between 0 and 9
                             </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-8">
+                        <div class="form-group w-50">
+                            <label for="referenceTable">Reference Table</label>
+                            <!-- <input autocomplete="off" type="text" class="form-control" id="referenceTable" name="referenceTable"
+                                placeholder="Reference Table"> -->
+                            <div class="input-group mb-3">
+                                <input autocomplete="off" type="text" class="form-control" id="referenceTable"
+                                    name="referenceTable" placeholder="Reference Table">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" id="validateTable"
+                                        autocomplete="off">Validate</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group w-50">
+                            <label for="referenceTableIndex">Reference Table Index</label>
+                            <select disabled class="form-select" id="referenceTableIndex">
+                                <!-- <option selected value="Decimal">Decimal</option>
+                                <option value="String">String</option> -->
+                            </select>
+                            <!-- <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
+                                placeholder="XtendM3 Table">
+                            <div class="invalid-feedback">
+                                Format must be EXTxxx where x is a letter or a number between 0 and 9
+                            </div> -->
                         </div>
                     </div>
                     <br />
