@@ -252,14 +252,16 @@ window.onload = function () {
         $("#referenceTableIndex").empty();
         $("#fieldsTableBody").empty();
         fields = []
+        primaryKeys = []
     });
 
     $("#fieldModal").on('show.bs.modal', function () {
         document.getElementById("fieldForm").reset();
         var modal = document.getElementById("fieldModal");
 
-        $("#fieldprimaryKey").prop("disabled", false)
+        // $("#fieldprimaryKey").prop("disabled", false)
         // console.log(modal.getElementsByClassName("is-invalid"))
+        $("#fieldprimaryKey").parent().show();
         validClasses = modal.getElementsByClassName("is-valid");
         for (var i = 0; i < validClasses.length; i++) {
             validClasses.item(i).classList.remove("is-valid");
@@ -272,7 +274,8 @@ window.onload = function () {
         var referenceTableIndex = $("#referenceTableIndex").val();
         if (referenceTableIndex != "" && referenceTableIndex != null && referenceTableIndex != undefined) {
             console.log(referenceTableIndex);
-            $("#fieldprimaryKey").prop("disabled", true)
+            $("#fieldprimaryKey").parent().hide();
+            // $("#fieldprimaryKey").prop("disabled", true)
         }
         $("#fieldName").removeClass("is-invalid");
         $("#fieldName").removeClass("is-valid");
@@ -288,8 +291,33 @@ window.onload = function () {
 
     });
 
+    $('#editModal').on('hidden.bs.modal', function () {
+        // console.log("closed");
+        var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+        var selectedRows = [];
+        for (var i = 0; i < selectRowCheckbox.length; i++) {
+            if (selectRowCheckbox.item(i).checked) {
+                // selectedRows.push(selectRowCheckbox.item(i));
+                selectRowCheckbox.item(i).checked = false;
+            }
+        }
+    });
+
+    $('#deleteFieldModal').on('hidden.bs.modal', function () {
+        // console.log("closed");
+        var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+        var selectedRows = [];
+        for (var i = 0; i < selectRowCheckbox.length; i++) {
+            if (selectRowCheckbox.item(i).checked) {
+                // selectedRows.push(selectRowCheckbox.item(i));
+                selectRowCheckbox.item(i).checked = false;
+            }
+        }
+    });
+
     $("#editModal").on('show.bs.modal', function () {
-        $("#editfieldprimaryKey").prop("disabled", false);
+        // $("#editfieldprimaryKey").prop("disabled", false);
+        $("#editfieldprimaryKey").parent().show();
         document.getElementById("editfieldForm").reset();
         var modal = document.getElementById("editModal");
         // console.log(modal.getElementsByClassName("is-invalid"))
@@ -312,7 +340,8 @@ window.onload = function () {
         }
         var referenceTableIndex = $("#referenceTableIndex").val();
         if (referenceTableIndex != "" && referenceTableIndex != null && referenceTableIndex != undefined) {
-            $("#editfieldprimaryKey").prop("disabled", true)
+            // $("#editfieldprimaryKey").prop("disabled", true)
+            $("#editfieldprimaryKey").parent().hide();
         }
         console.log(selectedRows);
         var cols = selectedRows[0].childNodes;
@@ -604,11 +633,23 @@ window.onload = function () {
                 $("#generate").addClass("disabled");
             }
 
-            if ($("#mainForm .is-valid").length == 7 && $("#mainForm .is-invalid").length == 0 && fields.length > 0 && primaryKeys.length > 0) {
-                $("#generate").removeClass("disabled");
+            // console.log($("#miProgram").hasClass("is-valid"), $("#addTransaction").hasClass("is-valid"), $("#deleteTransaction").hasClass("is-valid"), $("#getTransaction").hasClass("is-valid"), $("#updateTransaction").hasClass("is-valid"), $("#userName").hasClass("is-valid"), $("#xtendTable").hasClass("is-valid"), fields.length > 0, primaryKeys.length > 0);
+            // console.log($("#miProgram").hasClass("is-valid") && $("#addTransaction").hasClass("is-valid") && $("#deleteTransaction").hasClass("is-valid") && $("#getTransaction").hasClass("is-valid") && $("#updateTransaction").hasClass("is-valid") && $("#userName").hasClass("is-valid") && $("#xtendTable").hasClass("is-valid") && fields.length > 0 && primaryKeys.length > 0);
+
+            if ($("#miProgram").hasClass("is-valid") && $("#xtendTable").hasClass("is-valid") && $("#addTransaction").hasClass("is-valid") && $("#deleteTransaction").hasClass("is-valid")
+                && $("#getTransaction").hasClass("is-valid") && $("#updateTransaction").hasClass("is-valid") && $("#userName").hasClass("is-valid") && primaryKeys.length > 0 && fields.length > 0) {
+                $('#generate').prop('disabled', false);
+                $('#generate').removeClass('disabled');
             } else {
-                $("#generate").addClass("disabled");
+                $('#generate').prop('disabled', true);
+                $('#generate').addClass('disabled');
             }
+
+            // if ($("#mainForm .is-valid").length == 7 && $("#mainForm .is-invalid").length == 0 && fields.length > 0 && primaryKeys.length > 0) {
+            //     $("#generate").removeClass("disabled");
+            // } else {
+            //     $("#generate").addClass("disabled");
+            // }
 
             // console.log(miProgram, miTable, username, table);
 
@@ -783,6 +824,7 @@ function updateIndexFields() {
 
     $("#fieldsTableBody").empty();
     fields = []
+    primaryKeys = []
 
     for (var i = tableMetadata["indices"][value].length - 1; i >= 0; i--) {
         var index = tableMetadata["indices"][value][i];
@@ -831,6 +873,7 @@ function updateIndexFields() {
 
         document.getElementById("fieldsTableBody").prepend(row);
         fields.push(columnDetails[0].name.trim().toUpperCase());
+        primaryKeys.push(columnDetails[0].name.trim().toUpperCase());
     }
 
 
@@ -846,6 +889,21 @@ function updateIndexFields() {
 function generateJSONs() {
 
     btn = document.getElementById('generate');
+
+    console.log($("#miProgram").val(), $("#xtendTable").val(), $("#addTransaction").val(), $("#deleteTransaction").val(), $("#getTransaction").val(), $("#updateTransaction").val(), $("#userName").val());
+    console.log($("#miProgram").hasClass("is-valid") && $("#xtendTable").hasClass("is-valid") && $("#addTransaction").hasClass("is-valid") && $("#deleteTransaction").hasClass("is-valid")
+        && $("#getTransaction").hasClass("is-valid") && $("#updateTransaction").hasClass("is-valid") && $("#userName").hasClass("is-valid"));
+
+    if ($("#miProgram").hasClass("is-valid") && $("#xtendTable").hasClass("is-valid") && $("#addTransaction").hasClass("is-valid") && $("#deleteTransaction").hasClass("is-valid")
+        && $("#getTransaction").hasClass("is-valid") && $("#updateTransaction").hasClass("is-valid") && $("#userName").hasClass("is-valid") && primaryKeys.length > 0 && fields.length > 0) {
+        btn.disabled = false;
+    } else {
+        console.log($("#miProgram").hasClass("is-valid"), $("#xtendTable").hasClass("is-valid"), $("#addTransaction").hasClass("is-valid"), $("#deleteTransaction").hasClass("is-valid"), $("#getTransaction").hasClass("is-valid"), $("#updateTransaction").hasClass("is-valid"), $("#userName").hasClass("is-valid"));
+        return;
+    }
+
+
+
 
     $("#tableDownloadButton").prop("disabled", true);
     $("#addDownloadButton").prop("disabled", true);
@@ -1247,7 +1305,7 @@ function generateJSONs() {
 
     var totalRequests = 4;
 
-    $.ajax(addsettings).done(function (response) {
+    $.ajax(addsettings).then(function (response) {
         setTimeout(function () {
             totalRequests--;
             if (totalRequests == 0) {
@@ -1331,6 +1389,10 @@ function generateJSONs() {
                                     document.getElementById("generateMessage").innerHTML = "";
                                     btn.innerHTML = "Generate";
                                 }, 3000);
+                            }).catch(function (response) {
+                                console.log(response);
+                                document.getElementById("generateMessage").innerHTML = "";
+                                btn.innerHTML = "Generate";
                             });
 
 
@@ -1340,6 +1402,10 @@ function generateJSONs() {
 
 
 
+                    }).catch(function (response) {
+                        console.log(response);
+                        document.getElementById("generateMessage").innerHTML = "";
+                        btn.innerHTML = "Generate";
                     });
 
                 }, 3000);
@@ -1347,10 +1413,21 @@ function generateJSONs() {
 
 
 
+            }).catch(function (response) {
+                console.log(response);
+                document.getElementById("generateMessage").innerHTML = "";
+                btn.innerHTML = "Generate";
             });
+
+
+
         }, 3000);
 
 
+    }).catch(function (response) {
+        console.log(response);
+        document.getElementById("generateMessage").innerHTML = "";
+        btn.innerHTML = "Generate";
     });
 
 

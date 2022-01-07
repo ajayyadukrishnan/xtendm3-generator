@@ -433,6 +433,30 @@ window.onload = function () {
         }
     });
 
+    $('#editModal').on('hidden.bs.modal', function () {
+        // console.log("closed");
+        var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+        var selectedRows = [];
+        for (var i = 0; i < selectRowCheckbox.length; i++) {
+            if (selectRowCheckbox.item(i).checked) {
+                // selectedRows.push(selectRowCheckbox.item(i));
+                selectRowCheckbox.item(i).checked = false;
+            }
+        }
+    });
+
+    $('#deleteFieldModal').on('hidden.bs.modal', function () {
+        // console.log("closed");
+        var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+        var selectedRows = [];
+        for (var i = 0; i < selectRowCheckbox.length; i++) {
+            if (selectRowCheckbox.item(i).checked) {
+                // selectedRows.push(selectRowCheckbox.item(i));
+                selectRowCheckbox.item(i).checked = false;
+            }
+        }
+    });
+
 };
 
 function editField() {

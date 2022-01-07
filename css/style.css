@@ -7,7 +7,7 @@
 
 .cursive {
     font-family: 'The Nautigal', cursive;
-    font-size: 3.5em;
+    font-size: 2em;
     font-weight: bold;
     color: #f7f7f7;
 }
@@ -56,8 +56,16 @@
 }
 
 .invalid-feedback {
-    font-size: medium !important;
+    font-size: .8em !important;
     color: red !important;
+}
+
+.invalid-feedback {
+    /* position: absolute !important; */
+    position: center !important;
+    font-size: .8em !important;
+    color: red !important;
+    /* white-space: nowrap !important; */
 }
 
 .form-control.is-valid {
@@ -156,22 +164,100 @@
 
 input {
     border-radius: 10px !important;
-    padding: 10px;
+    padding: 10px !important;
     width: 100%;
-    font-size: 1.4em;
-    margin-bottom: 10px;
-    height: 2.2em;
+    font-size: 1em !important;
+    margin-bottom: 0vh !important;
+    height: 4vh !important;
 }
+
+/* input::placeholder {
+    border-radius: 10px !important;
+    padding: 10px !important;
+    width: 100%;
+    font-size: 1em !important;
+    margin-bottom: 0vh !important;
+    height: 1.8em !important;
+} */
 
 input:focus {
     border: 1px solid rgb(0, 167, 245) !important;
     box-shadow: 0px 0px 15px rgb(0, 167, 245) !important;
 }
 
+input[type='checkbox'] {
+    height: 0.8vh !important;
+    width: 0.8vh !important;
+    border-radius: 50% !important;
+    /* border: 1px solid rgb(0, 167, 245) !important; */
+    /* box-shadow: 0px 0px 15px rgb(0, 167, 245) !important; */
+}
+
 label {
-    font-size: 1.2em;
-    /* font-weight: bold; */
-    margin-bottom: 10px;
+    font-size: 0.9em !important;
+}
+
+label[for='fieldType'] {
+    font-size: 0.8em !important;
+    height: 4vh !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+#fieldType {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    height: 4vh !important;
+    font-size: 0.85em !important;
+}
+
+#editfieldType {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    height: 4vh !important;
+    font-size: 0.85em !important;
+}
+
+
+#lookupField {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    height: 4vh !important;
+}
+
+#fieldName {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    height: 4vh !important;
+}
+
+#fieldName::-webkit-calendar-picker-indicator {
+    /* border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    height: 4vh !important; */
+    padding-right: 2.0vw !important;
+}
+
+#editfieldName {
+    height: 4vh !important;
+}
+
+#referenceTableIndex {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    height: 4vh !important;
+    font-size: 00.8em !important;
+}
+
+#tableIndex {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    height: 4vh !important;
+    font-size: 00.8em !important;
 }
 
 .btn {
@@ -179,14 +265,63 @@ label {
     align-content: center;
 }
 
-#validateTable:before{
+#validateTable::before {
     content: "";
     border: red !important;
     bottom: 20px !important;
+    border-radius: 0px !important;
+}
+
+#validateTable {
+    content: "";
+    height: 4vh !important;
+    font-size: 01em !important;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    /* vertical-align: middle; */
+    /* border: red !important; */
+    /* bottom: 20px !important; */
+}
+
+#generate {
+    content: "";
+    height: 4vh !important;
+    font-size: 01em !important;
+    border-radius: 10px;
+    /* border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px; */
+    /* vertical-align: middle; */
+    /* border: red !important; */
+    /* bottom: 20px !important; */
+}
+
+#validateField {
+    content: "";
+    height: 4vh !important;
+    font-size: 01em !important;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    /* vertical-align: middle; */
+    /* border: red !important; */
+    /* bottom: 20px !important; */
+}
+
+#referenceTable {
+    border-radius: 10px !important;
+    padding: 10px !important;
+    /* width: 100%; */
+    font-size: 1em !important;
+    margin-bottom: 0vh !important;
+    height: 4vh !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
 }
 
 .form-select {
-    height: 2.2em !important;
+    height: 1.8em !important;
+    border-radius: 1.8em !important;
 }
 
 .input-group-text {
@@ -259,7 +394,7 @@ label {
     display: inline-block;
 }
 
-.footer-author {
+.footer-author, .footer-fork {
     vertical-align: middle;
     display: inline-block;
 }

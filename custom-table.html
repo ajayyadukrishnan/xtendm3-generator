@@ -23,19 +23,19 @@
     <div class="content">
     </div>
     <center>
-        <br /><br />
-        <h1>New XtendM3 Table</h1>
+        <br />
+        <h3>New XtendM3 Table</h3>
         <p class="cursive">Generate XtendM3 table and transactions</p>
         <div class="container">
             <div class="form-container w-75">
                 <div id="mainForm">
-                    <div class="row col-8">
-                        <div class="form-group w-100">
+                    <div class="row col-6">
+                        <div class="form-group w-50">
                             <label for="miProgram">MI Program</label>
                             <input autocomplete="off" type="text" class="form-control" id="miProgram" name="miProgram"
                                 placeholder="EXTxxxMI">
-                            <div class="invalid-feedback">
-                                Format must be EXTxxxMI where x a number between 0 and 9
+                            <div class="invalid-feedback align-items-center">
+                                EXTxxxMI where x a number between 0 and 9
                             </div>
                         </div>
                         <!-- <div class="form-group w-50">
@@ -43,9 +43,17 @@
                             <input autocomplete="off" type="text" class="form-control" id="transaction" name="transaction"
                                 placeholder="MI Transaction">
                         </div> -->
+                        <div class="form-group w-50">
+                            <label for="xtendTable">XtendM3 Table</label>
+                            <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
+                                placeholder="XtendM3 Table">
+                            <div class="invalid-feedback">
+                                Format must be EXTxxx where x is a letter or a number between 0 and 9
+                            </div>
+                        </div>
                     </div>
                     <br />
-                    <div class="row col-8">
+                    <div class="row col-6">
                         <div class="form-group w-50">
                             <label for="addTransaction">Add Transaction</label>
                             <input autocomplete="off" type="text" class="form-control" id="addTransaction"
@@ -66,7 +74,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="row col-8">
+                    <div class="row col-6">
                         <div class="form-group w-50">
                             <label for="getTransaction">Get Transaction</label>
                             <input autocomplete="off" type="text" class="form-control" id="getTransaction"
@@ -94,8 +102,8 @@
                                 placeholder="Get Transaction">
                         </div>
                     </div> -->
-                    <div class="row col-8">
-                        <div class="form-group w-50">
+                    <div class="row col-12">
+                        <div class="form-group col-lg-4 col-sm-12">
                             <label for="userName">Username</label>
                             <input autocomplete="off" type="text" class="form-control" id="userName" name="userName"
                                 placeholder="M3 Username">
@@ -104,21 +112,38 @@
                                 characters
                             </div>
                         </div>
-                        <div class="form-group w-50">
-                            <label for="xtendTable">XtendM3 Table</label>
-                            <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
-                                placeholder="XtendM3 Table">
-                            <div class="invalid-feedback">
-                                Format must be EXTxxx where x is a letter or a number between 0 and 9
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row col-8">
-                        <div class="form-group w-50">
+                        <div class="form-group col-lg-4 col-sm-12">
                             <label for="referenceTable">Reference Table</label>
                             <!-- <input autocomplete="off" type="text" class="form-control" id="referenceTable" name="referenceTable"
                                 placeholder="Reference Table"> -->
+                            <div class="input-group mb-3">
+                                <input autocomplete="off" type="text" class="form-control" id="referenceTable"
+                                    name="referenceTable" placeholder="Reference Table">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary d-flex align-items-center" type="button" id="validateTable"
+                                        autocomplete="off">Validate</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-12">
+                            <label for="referenceTableIndex">Reference Table Index</label>
+                            <select disabled class="form-select d-flex align-items-center" id="referenceTableIndex">
+                                <!-- <option selected value="Decimal">Decimal</option>
+                                <option value="String">String</option> -->
+                            </select>
+                            <!-- <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
+                                placeholder="XtendM3 Table">
+                            <div class="invalid-feedback">
+                                Format must be EXTxxx where x is a letter or a number between 0 and 9
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <br /> -->
+                    <!-- <div class="row col-6">
+                        <div class="form-group w-50">
+                            <label for="referenceTable">Reference Table</label>
+                            <!-- <input autocomplete="off" type="text" class="form-control" id="referenceTable" name="referenceTable"
+                                placeholder="Reference Table">
                             <div class="input-group mb-3">
                                 <input autocomplete="off" type="text" class="form-control" id="referenceTable"
                                     name="referenceTable" placeholder="Reference Table">
@@ -132,16 +157,15 @@
                             <label for="referenceTableIndex">Reference Table Index</label>
                             <select disabled class="form-select" id="referenceTableIndex">
                                 <!-- <option selected value="Decimal">Decimal</option>
-                                <option value="String">String</option> -->
+                                <option value="String">String</option>
                             </select>
                             <!-- <input autocomplete="off" type="text" class="form-control" id="xtendTable" name="xtendTable"
                                 placeholder="XtendM3 Table">
                             <div class="invalid-feedback">
                                 Format must be EXTxxx where x is a letter or a number between 0 and 9
-                            </div> -->
+                            </div>
                         </div>
-                    </div>
-                    <br />
+                    </div>-->
                     <div class="d-flex justify-content-between">
                         <p><b>
                                 Fields
@@ -175,15 +199,15 @@
                         <tbody id="fieldsTableBody">
                         </tbody>
                     </table>
-                    <br />
-                    <button type="button" class="btn btn-primary" id="generate"
+                    <!-- <br /> -->
+                    <button type="button" class="btn btn-primary d-flex align-items-center" id="generate"
                         onclick="generateJSONs()">Generate</button>
                     <br /><br />
                     <span id="generateMessage"></span>
                 </div>
             </div>
         </div>
-        <br /><br />
+        <!-- <br /><br /> -->
     </center>
     <!-- <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> -->
     <center>
@@ -243,17 +267,16 @@
                         <div class="form-group fieldNameGroup">
                             <label for="fieldName">Field Name</label>
                             <div class="input-group mb-3">
-                                <input autocomplete="off" type="text" class="form-control text-uppercase" id="fieldName"
+                                <input autocomplete="off" type="text" class="form-control" id="fieldName"
                                     name="fieldName" placeholder="Field Name" required="true">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" id="lookupField">Auto-fill</button>
+                                    <button class="btn btn-primary d-flex align-items-center" type="button" id="lookupField">Auto-fill</button>
                                 </div>
                                 <div class="invalid-feedback">
                                     Only letters and numbers allowed. No spaces. Max length of 4
                                     characters
                                 </div>
                             </div>
-                            <br />
                         </div>
                         <div class="form-group fieldTypeGroup">
                             <div class="input-group mb-3">
@@ -407,6 +430,14 @@
             <i class="fa fa-github fa-2x githubIcon" aria-hidden="true"></i>
             <span class="footer-author">Ajay Yadukrishnan</span>
         </a>
+        &nbsp;&nbsp;
+        <a href="https://github.com/ajayyadukrishnan" target="_blank"><img
+                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fxtendm3.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Hits&edge_flat=false" /></a>
+
+        <div style="float: right;"><a href="https://github.com/ajayyadukrishnan/xtendm3-generator" class="footer-link" target="_blank">
+                <i class="fa fa-code-fork fa-2x forkIcon" aria-hidden="true"></i>
+                <span class="footer-fork">Fork Me!</span>
+            </a></div>
     </center>
     <!-- <i class="fa fa-github fa-2x"></i> -->
 </div>
