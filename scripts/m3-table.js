@@ -1068,7 +1068,7 @@ function generateJSONs() {
 
 
     var updatesettings = {
-        // "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
+        "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
         "method": "POST",
         "timeout": 0,
         "headers": {

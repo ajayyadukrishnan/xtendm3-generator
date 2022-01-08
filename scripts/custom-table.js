@@ -1303,7 +1303,7 @@ function generateJSONs() {
         "data": addJSON,
     };
     var deletesettings = {
-        // "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
+        "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
         "method": "POST",
         "timeout": 0,
         "headers": {
