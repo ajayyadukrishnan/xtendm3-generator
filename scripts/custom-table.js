@@ -11,7 +11,6 @@ var enableUpdateDownload = false;
 var referenceTableMetaData = {};
 var referenceTablePrefix = "";
 window.onload = function () {
-    console.log("Hello World!");
 
     $("#miProgram").on("input", function () {
         var value = $(this).val().toUpperCase();
