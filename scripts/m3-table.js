@@ -18,7 +18,8 @@ window.onload = function () {
     console.log("Hello World!");
 
     $("#miProgram").on("input", function () {
-        var value = $(this).val();
+        var value = $(this).val().toUpperCase();
+        $(this).val(value.toUpperCase());
         if (value.match("^EXT[0-9]{3}MI$")) {
             $("#miProgram").removeClass("is-invalid");
             $("#miProgram").addClass("is-valid");
@@ -30,7 +31,6 @@ window.onload = function () {
 
     $("#transaction").on("input", function () {
         var value = $(this).val().trim();
-        console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$")) {
             $("#transaction").removeClass("is-invalid");
             $("#transaction").addClass("is-valid");
@@ -42,13 +42,15 @@ window.onload = function () {
 
     $("#m3Table").on("input", function () {
         var value = $(this).val().trim();
+        $(this).val(value.toUpperCase());
         // console.log(value)
         $("#m3Table").removeClass("is-valid");
         $("#m3Table").addClass("is-invalid");
     });
 
     $("#userName").on("input", function () {
-        var value = $(this).val();
+        var value = $(this).val().toUpperCase();
+        $(this).val(value.toUpperCase());
         // console.log(value)
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,9}$")) {
             $("#userName").removeClass("is-invalid");
@@ -60,7 +62,8 @@ window.onload = function () {
     });
 
     $("#fieldName").on("input", function () {
-        var value = $(this).val();
+        var value = $(this).val().toUpperCase();
+        $(this).val(value.toUpperCase());
         // console.log(value)
         $("#fieldName").removeClass("is-valid");
         $("#fieldName").addClass("is-invalid");
@@ -69,7 +72,7 @@ window.onload = function () {
     });
 
     $("#editfieldName").on("input", function () {
-        var value = $(this).val();
+        var value = $(this).val().toUpperCase();
         // console.log(value)
         $("#editfieldName").removeClass("is-valid");
         $("#editfieldName").addClass("is-invalid");
@@ -1066,7 +1069,7 @@ function generateJSONs() {
 
 
     var updatesettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
+        // "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1076,6 +1079,16 @@ function generateJSONs() {
         "data": JSON.stringify(updateJSON),
     };
 
+    updatesettingsForError = {
+        "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "data": updateJSON,
+    };
     // $.ajax(addsettings).done(function (response) {
     //     console.log(response);
     //     addTransactionOutput = response;
@@ -1098,7 +1111,7 @@ function generateJSONs() {
     //     $('#getDownloadButton').prop('disabled', false);
     //     $("#tableDownloadButton").prop('disabled', false);
     // });
-    $.ajax(updatesettings).done(function (response) {
+    $.ajax(updatesettings).then(function (response) {
 
         // Do the work. A sample method to wait for 3 second.
         setTimeout(function () {
@@ -1112,6 +1125,20 @@ function generateJSONs() {
             $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 100);
             document.getElementById("generateMessage").innerHTML = "";
         }, 3000);
+    }).catch(function (response) {
+        console.log(response);
+        btn.innerHTML = 'Generate';
+        enableUpdateDownload = false;
+        $('#updateDownloadButton').prop('disabled', true);
+        $("#tableDownloadButton").prop('disabled', true);
+        document.getElementById("generateMessage").innerHTML = "";
+        $("#errorModal").modal('show');
+        if(response.status == 422){
+            $("#errorMessage").html("Failed to create the Update transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AUpdate+M3+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(updatesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.responseJSON.error + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+        } else {
+            $("#errorMessage").html("Failed to create the Update transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AUpdate+M3+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(updatesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.statusText + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+        }
+    
     });
 
 }

@@ -24,7 +24,12 @@
     </div>
     <center>
         <br />
-        <h3>New XtendM3 Table</h3>
+        <div class="headerLine">
+            <a href="index.html" class="homePage">
+                <i class="fa fa-home fa-3x" aria-hidden="true"></i>
+            </a>
+            <h1 class="pageTitle">New XtendM3 Table</h1>
+        </div>
         <p class="cursive">Generate XtendM3 table and transactions</p>
         <div class="container">
             <div class="form-container w-75">
@@ -120,8 +125,8 @@
                                 <input autocomplete="off" type="text" class="form-control" id="referenceTable"
                                     name="referenceTable" placeholder="Reference Table">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary d-flex align-items-center" type="button" id="validateTable"
-                                        autocomplete="off">Validate</button>
+                                    <button class="btn btn-primary d-flex align-items-center" type="button"
+                                        id="validateTable" autocomplete="off">Validate</button>
                                 </div>
                             </div>
                         </div>
@@ -233,9 +238,6 @@
                     </form>
                 </div>
                 <br /><br />
-                <a class="readmeLink" href="readme.html" target="_blank">
-                    <span>Instructions for importing table to M3</span>
-                </a>
                 <!-- <div class="col-md-3">
                     <form>
 
@@ -252,10 +254,14 @@
                     </form>
                 </div> -->
             </div>
+            <a class="readmeLink" href="instructions.html" target="_blank">
+                <span>Instructions for importing table to M3</span>
+            </a>
         </div>
     </center>
     <br /><br /><br /><br /><br /><br /><br />
-    <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
+    <div class="modal fade" id="fieldModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="fieldModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -270,7 +276,8 @@
                                 <input autocomplete="off" type="text" class="form-control" id="fieldName"
                                     name="fieldName" placeholder="Field Name" required="true">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary d-flex align-items-center" type="button" id="lookupField">Auto-fill</button>
+                                    <button class="btn btn-primary d-flex align-items-center" type="button"
+                                        id="lookupField">Auto-fill</button>
                                 </div>
                                 <div class="invalid-feedback">
                                     Only letters and numbers allowed. No spaces. Max length of 4
@@ -329,7 +336,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -339,9 +347,9 @@
                 <div class="modal-body">
                     <form id="editfieldForm" role="form">
                         <div class="form-group fieldNameGroup">
-                            <label for="editfieldName">Field Name</label>
-                            <input autocomplete="off" type="text" class="form-control text-uppercase" id="editfieldName"
-                                name="fieldName" placeholder="Field Name" required="true" aria-disabled="true" disabled>
+                            <label for="customeditfieldName">Field Name</label>
+                            <input autocomplete="off" type="text" class="form-control" id="customeditfieldName"
+                                name="customeditfieldName" placeholder="Field Name" required="true" aria-disabled="true" disabled>
                             <div class="invalid-feedback">
                                 Only letters and numbers allowed. No spaces. Max length of 4
                                 characters
@@ -399,7 +407,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deleteFieldModal" tabindex="-1" aria-labelledby="deleteFieldLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteFieldModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="deleteFieldLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -422,23 +431,57 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="errorModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="errorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <div class="footer">
-    <center>
+    <div style="float: left;">
+        &nbsp;&nbsp;&nbsp;
+        <a href="https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=Bug+Report"
+            class="feature-link" target="_blank">
+            <i class="fa fa-comment fa-lg fa-exclamation" aria-hidden="true"></i>
+            &nbsp;<span class="footer-feature">Raise an Issue</span>
+        </a>
+    </div>
+    <div class="footer-center">
         <a href="https://github.com/ajayyadukrishnan" class="footer-link" target="_blank">
             <i class="fa fa-github fa-2x githubIcon" aria-hidden="true"></i>
             <span class="footer-author">Ajay Yadukrishnan</span>
         </a>
-        &nbsp;&nbsp;
+        <!-- &nbsp;&nbsp;
         <a href="https://github.com/ajayyadukrishnan" target="_blank"><img
-                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fxtendm3.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Hits&edge_flat=false" /></a>
+                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fxtendm3.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Hits&edge_flat=false" /></a> -->
 
-        <div style="float: right;"><a href="https://github.com/ajayyadukrishnan/xtendm3-generator" class="footer-link" target="_blank">
-                <i class="fa fa-code-fork fa-2x forkIcon" aria-hidden="true"></i>
+
+        <div style="float: right;">
+            <a href="https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Feature+Request"
+                class="feature-link" target="_blank">
+                <i class="fa fa-comment fa-lg commentIcon" aria-hidden="true"></i>
+                &nbsp;<span class="footer-feature">Suggest a new feature</span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/ajayyadukrishnan/xtendm3-generator" class="footer-link" target="_blank">
+                <i class="fa fa-code-fork fa-lg forkIcon" aria-hidden="true"></i>
                 <span class="footer-fork">Fork Me!</span>
-            </a></div>
-    </center>
+            </a>
+        </div>
+    </div>
     <!-- <i class="fa fa-github fa-2x"></i> -->
 </div>
 

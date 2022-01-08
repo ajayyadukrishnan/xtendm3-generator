@@ -32,6 +32,27 @@
     pointer-events: all !important;
 }
 
+.headerLine {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.homePage {
+    width: 33.33333%;
+    text-align: left;
+    padding-left: 2vw !important;
+    color: #fff !important;
+}
+
+.pageTitle {
+    width: 33.33333%;
+    text-align: center;
+}
+
+.footer-center{
+    padding-left: 15vw !important;
+}
+
 #deleteButton {
     cursor: pointer;
     border-radius: 7.5% !important;
@@ -204,6 +225,13 @@ label[for='fieldType'] {
     border-bottom-left-radius: 10px !important;
 }
 
+label[for='editfieldType'] {
+    font-size: 0.8em !important;
+    height: 4vh !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
 #fieldType {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -231,6 +259,12 @@ label[for='fieldType'] {
     height: 4vh !important;
 }
 
+#m3Table {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    height: 4vh !important;
+}
+
 #fieldName::-webkit-calendar-picker-indicator {
     /* border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
@@ -239,7 +273,16 @@ label[for='fieldType'] {
 }
 
 #editfieldName {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
     height: 4vh !important;
+}
+
+#editfieldName::-webkit-calendar-picker-indicator {
+    /* border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    height: 4vh !important; */
+    padding-right: 2.0vw !important;
 }
 
 #referenceTableIndex {
@@ -308,6 +351,18 @@ label[for='fieldType'] {
     /* bottom: 20px !important; */
 }
 
+#validateEditField {
+    content: "";
+    height: 4vh !important;
+    font-size: 01em !important;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    /* vertical-align: middle; */
+    /* border: red !important; */
+    /* bottom: 20px !important; */
+}
+
 #referenceTable {
     border-radius: 10px !important;
     padding: 10px !important;
@@ -326,6 +381,10 @@ label[for='fieldType'] {
 
 .input-group-text {
     height: 2.2em !important;
+}
+
+.modal {
+    top: 15% !important;
 }
 
 .modal-header {
@@ -386,6 +445,19 @@ label[for='fieldType'] {
 .footer-link, .footer-link:visited, .footer-link:hover, .footer-link:active {
     color: inherit;
     text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.feature-link, .feature-link:visited, .feature-link:hover, .feature-link:active {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.homePage, .homePage:visited, .homePage:hover, .homePage:active {
+    color: inherit;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .githubIcon {
@@ -394,9 +466,10 @@ label[for='fieldType'] {
     display: inline-block;
 }
 
-.footer-author, .footer-fork {
+.footer-author, .footer-fork, .footer-feature {
     vertical-align: middle;
     display: inline-block;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .readmeLink, .readmeLink:visited, .readmeLink:hover, .readmeLink:active {

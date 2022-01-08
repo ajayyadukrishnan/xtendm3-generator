@@ -14,7 +14,8 @@ window.onload = function () {
     console.log("Hello World!");
 
     $("#miProgram").on("input", function () {
-        var value = $(this).val();
+        var value = $(this).val().toUpperCase();
+        $(this).val(value.toUpperCase());
         if (value.match("^EXT[0-9]{3}MI$")) {
             $("#miProgram").removeClass("is-invalid");
             $("#miProgram").addClass("is-valid");
@@ -25,7 +26,7 @@ window.onload = function () {
     });
 
     $("#addTransaction").on("input", function () {
-        var value = $(this).val().trim();
+        var value = $(this).val();
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#deleteTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#addTransaction").removeClass("is-invalid");
             $("#addTransaction").addClass("is-valid");
@@ -36,7 +37,7 @@ window.onload = function () {
     });
 
     $("#deleteTransaction").on("input", function () {
-        var value = $(this).val().trim();
+        var value = $(this).val();
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#deleteTransaction").removeClass("is-invalid");
             $("#deleteTransaction").addClass("is-valid");
@@ -47,7 +48,7 @@ window.onload = function () {
     });
 
     $("#getTransaction").on("input", function () {
-        var value = $(this).val().trim();
+        var value = $(this).val();
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#updateTransaction").val().trim() != value && $("#deleteTransaction").val().trim() != value) {
             $("#getTransaction").removeClass("is-invalid");
             $("#getTransaction").addClass("is-valid");
@@ -58,7 +59,7 @@ window.onload = function () {
     });
 
     $("#updateTransaction").on("input", function () {
-        var value = $(this).val().trim();
+        var value = $(this).val();
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,14}$") && $("#addTransaction").val().trim() != value && $("#deleteTransaction").val().trim() != value && $("#getTransaction").val().trim() != value) {
             $("#updateTransaction").removeClass("is-invalid");
             $("#updateTransaction").addClass("is-valid");
@@ -70,6 +71,7 @@ window.onload = function () {
 
     $("#userName").on("input", function () {
         var value = $(this).val();
+        $(this).val(value.toUpperCase());
         if (value.match("^[a-zA-Z][a-zA-Z0-9]{0,9}$")) {
             $("#userName").removeClass("is-invalid");
             $("#userName").addClass("is-valid");
@@ -81,6 +83,7 @@ window.onload = function () {
 
     $("#xtendTable").on("input", function () {
         var value = $(this).val();
+        $(this).val(value.toUpperCase());
         if (value.match("^EXT[a-zA-Z0-9]{3}$")) {
             $("#xtendTable").removeClass("is-invalid");
             $("#xtendTable").addClass("is-valid");
@@ -92,6 +95,7 @@ window.onload = function () {
 
     $("#fieldName").on("input", function () {
         var value = $(this).val();
+        $(this).val(value.toUpperCase());
         if (value.match("^[0-9a-zA-Z]{4}$") && fields.indexOf(value.toUpperCase()) == -1
             && ["RGDT", "RGTM", "LMDT", "LMTS", "CHID", "CHNO"].indexOf(value.trim().toUpperCase()) == -1) {
             $("#fieldName").removeClass("is-invalid");
@@ -164,15 +168,16 @@ window.onload = function () {
         }
     });
 
-    $("#editfieldName").on("input", function () {
+    $("#customeditfieldName").on("input", function () {
         var value = $(this).val();
+        $(this).val(value.toUpperCase());
         if (value.match("^[0-9a-zA-Z]{4}$") && fields.indexOf(value.toUpperCase()) == -1
             && ["RGDT", "RGTM", "LMDT", "LMTS", "CHID", "CHNO"].indexOf(value.trim().toUpperCase()) == -1) {
-            $("#editfieldName").removeClass("is-invalid");
-            $("#editfieldName").addClass("is-valid");
+            $("#customeditfieldName").removeClass("is-invalid");
+            $("#customeditfieldName").addClass("is-valid");
         } else {
-            $("#editfieldName").removeClass("is-valid");
-            $("#editfieldName").addClass("is-invalid");
+            $("#customeditfieldName").removeClass("is-valid");
+            $("#customeditfieldName").addClass("is-invalid");
         }
     });
 
@@ -185,6 +190,8 @@ window.onload = function () {
             $("#editfieldDecimal").removeClass("is-invalid");
             $("#editfieldDecimal").removeClass("is-valid");
             $("#editfieldLength").val("");
+            $("#editfieldLength").removeClass("is-invalid");
+            $("#editfieldLength").removeClass("is-valid");
         }
     });
 
@@ -246,6 +253,7 @@ window.onload = function () {
 
     $("#referenceTable").on("input", function () {
         var value = $(this).val();
+        $(this).val(value.toUpperCase());
         $("#referenceTable").removeClass("is-valid");
         $("#referenceTable").add("is-invalid");
 
@@ -356,15 +364,15 @@ window.onload = function () {
 
         console.log(fieldName, fieldType, fieldLength, fieldDecimal, fieldDescription, isPrimaryKey);
 
-        $("#editfieldName").val(fieldName);
+        $("#customeditfieldName").val(fieldName);
         $("#editfieldType").val(fieldType);
         $("#editfieldLength").val(fieldLength);
         $("#editfieldDecimal").val(fieldDecimal);
         $("#editfieldDescription").val(fieldDescription);
         $("#editfieldprimaryKey").prop("checked", isPrimaryKey);
 
-        $("#editfieldName").removeClass("is-invalid");
-        $("#editfieldName").addClass("is-valid");
+        $("#customeditfieldName").removeClass("is-invalid");
+        $("#customeditfieldName").addClass("is-valid");
         // $("#editfieldType").removeClass("is-invalid");
         // $("#editfieldType").addClass("is-valid");
         var dataType = $("#editfieldType").val();
@@ -403,6 +411,19 @@ window.onload = function () {
     $("#lookupField").on("click", function () {
         var value = $("#fieldName").val();
         console.log(value)
+        $("#fieldLength").val("");
+        $("#fieldDecimal").val("");
+        $("#fieldDescription").val("");
+
+        $("#fieldType").removeClass("is-invalid");
+        $("#fieldType").removeClass("is-valid");
+        $("#fieldLength").removeClass("is-invalid");
+        $("#fieldLength").removeClass("is-valid");
+        $("#fieldDecimal").removeClass("is-invalid");
+        $("#fieldDecimal").removeClass("is-valid");
+        $("#fieldDescription").removeClass("is-invalid");
+        $("#fieldDescription").removeClass("is-valid");
+
         if (value.trim().length < 4 || ["RGDT", "RGTM", "LMDT", "LMTS", "CHID", "CHNO"].indexOf(value.trim().toUpperCase()) > -1) {
             $("#fieldName").addClass("is-invalid");
             $("#fieldName").removeClass("is-valid");
@@ -771,7 +792,7 @@ function saveChanges() {
     }
     console.log(selectedRows)
 
-    var fieldName = document.getElementById("editfieldName").value.toUpperCase();
+    var fieldName = document.getElementById("customeditfieldName").value.toUpperCase();
     var fieldType = document.getElementById("editfieldType").value;
     var fieldLength = document.getElementById("editfieldLength").value;
     var fieldDecimal = document.getElementById("editfieldDecimal").value;
@@ -1272,8 +1293,18 @@ function generateJSONs() {
         },
         "data": JSON.stringify(addJSON),
     };
+    var addsettingsForError = {
+        "url": "https://xtendm3-api.herokuapp.com/transactions/add",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "data": addJSON,
+    };
     var deletesettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
+        // "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1281,6 +1312,16 @@ function generateJSONs() {
             "Access-Control-Allow-Origin": "*"
         },
         "data": JSON.stringify(deleteJSON),
+    };
+    var deletesettingsForError = {
+        "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "data": deleteJSON,
     };
     var getsettings = {
         "url": "https://xtendm3-api.herokuapp.com/transactions/get",
@@ -1292,6 +1333,16 @@ function generateJSONs() {
         },
         "data": JSON.stringify(getJSON),
     };
+    var getsettingsForError = {
+        "url": "https://xtendm3-api.herokuapp.com/transactions/get",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "data": getJSON,
+    };
     var updatesettings = {
         "url": "https://xtendm3-api.herokuapp.com/transactions/update",
         "method": "POST",
@@ -1301,6 +1352,16 @@ function generateJSONs() {
             "Access-Control-Allow-Origin": "*"
         },
         "data": JSON.stringify(updateJSON),
+    };
+    var updatesettingsForError = {
+        "url": "https://xtendm3-api.herokuapp.com/transactions/update",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "data": updateJSON,
     };
 
     var totalRequests = 4;
@@ -1393,6 +1454,12 @@ function generateJSONs() {
                                 console.log(response);
                                 document.getElementById("generateMessage").innerHTML = "";
                                 btn.innerHTML = "Generate";
+                                $("#errorModal").modal('show');
+                                if (response.status == 422) {
+                                    $("#errorMessage").html("Failed to create the Update transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AUpdate+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(updatesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.responseJSON.error + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                                } else {
+                                    $("#errorMessage").html("Failed to create the Update transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AUpdate+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(updatesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.statusText + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                                }
                             });
 
 
@@ -1406,6 +1473,12 @@ function generateJSONs() {
                         console.log(response);
                         document.getElementById("generateMessage").innerHTML = "";
                         btn.innerHTML = "Generate";
+                        $("#errorModal").modal('show');
+                        if (response.status == 422) {
+                            $("#errorMessage").html("Failed to create the Get transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AGet+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(getsettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.responseJSON.error + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                        } else {
+                            $("#errorMessage").html("Failed to create the Get transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AGet+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(getsettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.statusText + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                        }
                     });
 
                 }, 3000);
@@ -1417,6 +1490,12 @@ function generateJSONs() {
                 console.log(response);
                 document.getElementById("generateMessage").innerHTML = "";
                 btn.innerHTML = "Generate";
+                $("#errorModal").modal('show');
+                if (response.status == 422) {
+                    $("#errorMessage").html("Failed to create the Delete transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0ADelete+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(deletesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.responseJSON.error + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                } else {
+                    $("#errorMessage").html("Failed to create the Delete transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0ADelete+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(deletesettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.statusText + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+                }
             });
 
 
@@ -1428,6 +1507,12 @@ function generateJSONs() {
         console.log(response);
         document.getElementById("generateMessage").innerHTML = "";
         btn.innerHTML = "Generate";
+        $("#errorModal").modal('show');
+        if (response.status == 422) {
+            $("#errorMessage").html("Failed to create the Add transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AAdd+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(addsettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.responseJSON.error + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+        } else {
+            $("#errorMessage").html("Failed to create the Add transaction. Please try again.<br/><br/>" + "<a href='https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?title=New+bug+report&body=%23+API+Failure%0AAdd+Transaction%0A%0A%23%23+API+Request%0A%0A```javascript%0A%0A" + encodeURIComponent(JSON.stringify(addsettingsForError, null, "\t")) + "%0A%0A```%0A%0A%23%23+API+Response:%0A%0A" + response.statusText + "&labels=API+Failure,bug' target='_blank'>Raise an issue.</a>");
+        }
     });
 
 

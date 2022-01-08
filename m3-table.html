@@ -26,7 +26,12 @@
     </div>
     <center>
         <br /><br />
-        <h1>Update M3 Table</h1>
+        <div class="headerLine">
+            <a href="index.html" class="homePage">
+                <i class="fa fa-home fa-3x" aria-hidden="true"></i>
+            </a>
+            <h1 class="pageTitle">Update M3 Table</h1>
+        </div>
         <p class="cursive">XtendM3 APIs to update M3 tables</p>
         <br /><br /><br />
         <div class="container">
@@ -195,7 +200,8 @@
         </div>
         <br /><br /><br /><br />
     </center>
-    <div class="modal fade" id="fieldModal" tabindex="-1" aria-labelledby="fieldModalLabel" aria-hidden="true">
+    <div class="modal fade" id="fieldModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="fieldModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
@@ -216,8 +222,7 @@
                                 <input type="text" class="form-control" id="fieldName" name="fieldName"
                                     placeholder="Field Name" required="true" autocomplete="off" list="fieldDataList">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"
-                                        id="validateField">Validate</button>
+                                    <button class="btn btn-primary" type="button" id="validateField">Validate</button>
                                 </div>
                                 <!-- <div class="invalid-feedback">
                                     Field does not exist in the table.
@@ -280,7 +285,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -362,7 +368,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deleteFieldModal" tabindex="-1" aria-labelledby="deleteFieldLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteFieldModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="deleteFieldLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -385,23 +392,57 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="errorModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="errorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <div class="footer">
-    <center>
+    <div style="float: left;">
+        &nbsp;&nbsp;&nbsp;
+        <a href="https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=Bug+Report"
+            class="feature-link" target="_blank">
+            <i class="fa fa-comment fa-lg fa-exclamation" aria-hidden="true"></i>
+            &nbsp;<span class="footer-feature">Raise an Issue</span>
+        </a>
+    </div>
+    <div class="footer-center">
         <a href="https://github.com/ajayyadukrishnan" class="footer-link" target="_blank">
             <i class="fa fa-github fa-2x githubIcon" aria-hidden="true"></i>
             <span class="footer-author">Ajay Yadukrishnan</span>
         </a>
-        &nbsp;&nbsp;
+        <!-- &nbsp;&nbsp;
         <a href="https://github.com/ajayyadukrishnan" target="_blank"><img
-                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fxtendm3.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Hits&edge_flat=false" /></a>
+                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fxtendm3.netlify.app&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Hits&edge_flat=false" /></a> -->
 
-        <div style="float: right;"><a href="https://github.com/ajayyadukrishnan/xtendm3-generator" class="footer-link" target="_blank">
-                <i class="fa fa-code-fork fa-2x forkIcon" aria-hidden="true"></i>
+
+        <div style="float: right;">
+            <a href="https://github.com/ajayyadukrishnan/xtendm3-generator/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Feature+Request"
+                class="feature-link" target="_blank">
+                <i class="fa fa-comment fa-lg commentIcon" aria-hidden="true"></i>
+                &nbsp;<span class="footer-feature">Suggest a new feature</span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/ajayyadukrishnan/xtendm3-generator" class="footer-link" target="_blank">
+                <i class="fa fa-code-fork fa-lg forkIcon" aria-hidden="true"></i>
                 <span class="footer-fork">Fork Me!</span>
-            </a></div>
-    </center>
+            </a>
+        </div>
+    </div>
     <!-- <i class="fa fa-github fa-2x"></i> -->
 </div>
 
