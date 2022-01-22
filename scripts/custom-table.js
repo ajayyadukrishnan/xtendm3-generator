@@ -1208,6 +1208,7 @@ function generateJSONs() {
         "Table": $("#xtendTable").val(),
         "referenceTable": referenceTable,
         "referenceTableIndex": referenceTableIndex,
+        "referenceTablePrefix": referenceTablePrefix,
     };
 
     var deleteJSON = {
