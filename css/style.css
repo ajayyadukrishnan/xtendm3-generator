@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Josefin+Sans&family=Open+Sans:ital,wght@1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=The+Nautigal:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rochester:wght@700&display=swap');
 
 * {
     font-family: 'Josefin Sans', sans-serif;
 }
 
 .cursive {
-    font-family: 'The Nautigal', cursive;
+    font-family: 'Rochester', cursive;
     font-size: 2em;
     font-weight: bold;
     /*     color: #f7f7f7; */
