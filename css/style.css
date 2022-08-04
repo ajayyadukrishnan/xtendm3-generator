@@ -9,7 +9,8 @@
     font-family: 'The Nautigal', cursive;
     font-size: 2em;
     font-weight: bold;
-    color: #f7f7f7;
+    /*     color: #f7f7f7; */
+    color: black;
 }
 
 .customCard {
