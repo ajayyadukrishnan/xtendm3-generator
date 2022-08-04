@@ -7,8 +7,8 @@
 
 .cursive {
     font-family: 'Rochester', cursive;
-    font-size: 2em;
-    font-weight: bold;
+    font-size: 1.5em;
+    /*     font-weight: bold; */
     /*     color: #f7f7f7; */
     color: black;
 }
