@@ -430,7 +430,7 @@ window.onload = function () {
         } else {
             $("#fieldName").addClass("is-loading");
             var lookupData = {
-                "url": "https://xtendm3-api.herokuapp.com/tables/lookupColumn?column=" + value,
+                "url": "https://xtendm3-api.onrender.com/tables/lookupColumn?column=" + value,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -504,7 +504,7 @@ window.onload = function () {
         // $("#referenceTable").removeClass("is-loading");
         // $("#referenceTable").addClass("is-loading");
         var getTableMetadataData = {
-            "url": "https://xtendm3-api.herokuapp.com/tables/getTableMetadata?table=" + value,
+            "url": "https://xtendm3-api.onrender.com/tables/getTableMetadata?table=" + value,
             "method": "GET",
             "timeout": 0,
             "headers": {
@@ -1284,7 +1284,7 @@ function generateJSONs() {
     console.log(deleteJSON)
 
     var addsettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/add",
+        "url": "https://xtendm3-api.onrender.com/transactions/add",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1294,7 +1294,7 @@ function generateJSONs() {
         "data": JSON.stringify(addJSON),
     };
     var addsettingsForError = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/add",
+        "url": "https://xtendm3-api.onrender.com/transactions/add",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1304,7 +1304,7 @@ function generateJSONs() {
         "data": addJSON,
     };
     var deletesettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
+        "url": "https://xtendm3-api.onrender.com/transactions/delete",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1314,7 +1314,7 @@ function generateJSONs() {
         "data": JSON.stringify(deleteJSON),
     };
     var deletesettingsForError = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/delete",
+        "url": "https://xtendm3-api.onrender.com/transactions/delete",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1324,7 +1324,7 @@ function generateJSONs() {
         "data": deleteJSON,
     };
     var getsettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/get",
+        "url": "https://xtendm3-api.onrender.com/transactions/get",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1334,7 +1334,7 @@ function generateJSONs() {
         "data": JSON.stringify(getJSON),
     };
     var getsettingsForError = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/get",
+        "url": "https://xtendm3-api.onrender.com/transactions/get",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1344,7 +1344,7 @@ function generateJSONs() {
         "data": getJSON,
     };
     var updatesettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/update",
+        "url": "https://xtendm3-api.onrender.com/transactions/update",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1354,7 +1354,7 @@ function generateJSONs() {
         "data": JSON.stringify(updateJSON),
     };
     var updatesettingsForError = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/update",
+        "url": "https://xtendm3-api.onrender.com/transactions/update",
         "method": "POST",
         "timeout": 0,
         "headers": {
