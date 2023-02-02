@@ -95,7 +95,7 @@ window.onload = function () {
         $("#m3Table").addClass("is-loading");
         $('#fieldsTableBody').empty();
         var getTableMetadataData = {
-            "url": "https://xtendm3-api.herokuapp.com/tables/getTableMetadata?table=" + value,
+            "url": "https://xtendm3-api.onrender.com/tables/getTableMetadata?table=" + value,
             "method": "GET",
             "timeout": 0,
             "headers": {
@@ -1068,7 +1068,7 @@ function generateJSONs() {
 
 
     var updatesettings = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
+        "url": "https://xtendm3-api.onrender.com/transactions/m3Update",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -1079,7 +1079,7 @@ function generateJSONs() {
     };
 
     updatesettingsForError = {
-        "url": "https://xtendm3-api.herokuapp.com/transactions/m3Update",
+        "url": "https://xtendm3-api.onrender.com/transactions/m3Update",
         "method": "POST",
         "timeout": 0,
         "headers": {
