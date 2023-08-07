@@ -629,9 +629,21 @@ window.onload = function () {
             }
 
             if (selectedRows.length == 1) {
+                $("#moveUpButton").removeClass("disabled");
+                $("#moveUpButton").prop("disabled", false);
+                
+                $("#moveDownButton").removeClass("disabled");
+                $("#moveDownButton").prop("disabled", false);
+
                 $("#editButton").removeClass("disabled");
                 $("#editButton").prop("disabled", false);
             } else {
+                $("#moveUpButton").addClass("disabled");
+                $("#moveUpButton").prop("disabled", true);
+                
+                $("#moveDownButton").addClass("disabled");
+                $("#moveDownButton").prop("disabled", true);
+
                 $("#editButton").addClass("disabled");
                 $("#editButton").prop("disabled", true);
             }
@@ -771,6 +783,79 @@ function deleteField() {
             primaryKeys.splice(primaryKeyIndex, 1);
         }
     }
+    $("#deleteFieldModal").modal('toggle')
+
+}
+
+function moveFieldUp() {
+    var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+    var selectedRows = [];
+    for (var i = 0; i < selectRowCheckbox.length; i++) {
+        if (selectRowCheckbox.item(i).checked) {
+            selectedRows.push(selectRowCheckbox.item(i));
+        }
+    }
+    console.log(selectedRows)
+    for (var i = 0; i < selectedRows.length; i++) {
+        var row = selectedRows[i];
+        var parentTable = row.closest('table');
+        var index = Array.from(parentTable.rows).indexOf(row);
+    
+        if (index > 0) {
+            parentTable.rows[index].parentNode.insertBefore(row, parentTable.rows[index - 1]);
+    
+            // Update your fields and primaryKeys arrays accordingly
+            var fieldIndex = fields.indexOf(row.cells[1].innerHTML);
+            if (fieldIndex !== -1) {
+                fields.splice(fieldIndex, 1);
+                fields.splice(index - 1, 0, row.cells[1].innerHTML);
+            }
+    
+            var primaryKeyIndex = primaryKeys.indexOf(row.cells[1].innerHTML);
+            if (primaryKeyIndex !== -1) {
+                primaryKeys.splice(primaryKeyIndex, 1);
+                primaryKeys.splice(index - 1, 0, row.cells[1].innerHTML);
+            }
+        }
+    }
+    
+    $("#deleteFieldModal").modal('toggle')
+
+}
+
+function moveFieldDown() {
+    var selectRowCheckbox = document.getElementsByClassName("selectRowCheckbox");
+    var selectedRows = [];
+    for (var i = 0; i < selectRowCheckbox.length; i++) {
+        if (selectRowCheckbox.item(i).checked) {
+            selectedRows.push(selectRowCheckbox.item(i));
+        }
+    }
+    console.log(selectedRows)
+    for (var i = selectedRows.length - 1; i >= 0; i--) {
+        var row = selectedRows[i];
+        var parentTable = row.closest('table');
+        var index = Array.from(parentTable.rows).indexOf(row);
+    
+        if (index < parentTable.rows.length - 1) {
+            parentTable.rows[index].parentNode.insertBefore(parentTable.rows[index + 1], row);
+    
+            // Update your fields and primaryKeys arrays accordingly
+            var fieldIndex = fields.indexOf(row.cells[1].innerHTML);
+            if (fieldIndex !== -1) {
+                fields.splice(fieldIndex, 1);
+                fields.splice(index + 1, 0, row.cells[1].innerHTML);
+            }
+    
+            var primaryKeyIndex = primaryKeys.indexOf(row.cells[1].innerHTML);
+            if (primaryKeyIndex !== -1) {
+                primaryKeys.splice(primaryKeyIndex, 1);
+                primaryKeys.splice(index + 1, 0, row.cells[1].innerHTML);
+            }
+        }
+    }
+    
+    
     $("#deleteFieldModal").modal('toggle')
 
 }
