@@ -798,6 +798,7 @@ function moveFieldUp() {
     console.log(selectedRows)
     for (var i = 0; i < selectedRows.length; i++) {
         var row = selectedRows[i];
+        row = row.parentNode.parentNode;
         var parentTable = row.closest('table');
         var index = Array.from(parentTable.rows).indexOf(row);
     
@@ -830,8 +831,9 @@ function moveFieldDown() {
         }
     }
     console.log(selectedRows)
-    for (var i = selectedRows.length - 1; i >= 0; i--) {
+    for (var i = 0; i < selectedRows.length; i++) {
         var row = selectedRows[i];
+        row = row.parentNode.parentNode;
         var parentTable = row.closest('table');
         var index = Array.from(parentTable.rows).indexOf(row);
     
