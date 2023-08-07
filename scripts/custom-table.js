@@ -818,8 +818,6 @@ function moveFieldUp() {
             }
         }
     }
-    
-    $("#deleteFieldModal").modal('toggle')
 
 }
 
@@ -855,8 +853,6 @@ function moveFieldDown() {
         }
     }
     
-    
-    $("#deleteFieldModal").modal('toggle')
 
 }
 
