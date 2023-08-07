@@ -878,7 +878,7 @@ function updateIndexFields() {
         checkbox.className = "form-check-input mt-0 selectRowCheckbox";
         checkbox.value = "";
         checkbox.id = "checkbox";
-        checkbox.disabled = true;
+        // checkbox.disabled = true;
         checkboxCell.appendChild(checkbox);
 
         // <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"></input>
